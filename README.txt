@@ -1,20 +1,7 @@
-VIDYA NIRMAN WEBSITE PACKAGE
+Vidya Nirman Quest Upgrade
 
-Files:
-- index.html: homepage
-- vidyanirman-physics.html: Physics portal
-- vidyanirman-chemistry.html: Chemistry portal
-- vidyanirman-bio.html: Biology portal
-- logo.png and founder images: supplied image assets
-- *-quest.html: simple placeholder destinations for quest links
+Upload all files in this folder to the root of your GitHub Pages repository. Keep index.html in the root.
 
-HOSTING (Netlify):
-1. Extract this ZIP.
-2. Open https://app.netlify.com/drop
-3. Upload the extracted VidyaNirman folder (or its contents if the uploader asks).
-4. Open the published URL and test the Home, Physics, Chemistry and Biology links.
+Quest pages: bio-quest.html (50 questions), physics-quest.html (50 questions), chemistry-quest.html (50 questions), grand-quest.html (100 mixed-subject questions).
 
-NOTES:
-- This is a static HTML site and does not include a database or student login system.
-- The quest pages are placeholders, not fully built quiz games.
-- The pages use external CDNs/fonts, so an internet connection is needed for those visual libraries.
+These are static HTML pages and use Tailwind CDN for styling, so an internet connection is needed for that styling. Test each page after publishing.
