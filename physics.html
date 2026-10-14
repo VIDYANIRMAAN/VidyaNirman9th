@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vidya Nirman Physics - Class 9th CBSE/ICSE Comprehensive Portal</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Cinzel, Noto Serif Devanagari, Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Noto+Serif+Devanagari:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- MathJax for high quality mathematical derivations -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-dark-1: #0F0103;
+            --bg-dark-2: #220308;
+            --bg-dark-3: #3B0810;
+            --gold-light: #FFF0B3;
+            --gold-mid: #FFD700;
+            --gold-deep: #D4AF37;
+            --cyan-glow: #00F2FE;
+            --blue-glow: #4FACFE;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark-1);
+            color: #F3F4F6;
+            overflow-x: hidden;
+        }
+
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .font-devanagari { font-family: 'Noto Serif Devanagari', serif; }
+
+        /* Gold Gradient Text */
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #FFF0B3 0%, #FFD700 50%, #D4AF37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Physics Cyan Gradient Text */
+        .text-cyan-gradient {
+            background: linear-gradient(135deg, #E0F7FA 0%, #00F2FE 50%, #4FACFE 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Glowing Metallic Borders */
+        .border-gold-glow {
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+        }
+
+        .border-cyan-glow {
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+        }
+
+        /* Cards & Containers Backgrounds */
+        .bg-gurukul-card {
+            background: linear-gradient(145deg, rgba(34, 3, 8, 0.85) 0%, rgba(15, 1, 3, 0.95) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+        }
+
+        .bg-derivation-box {
+            background: rgba(15, 1, 3, 0.9);
+            border-left: 4px solid #FFD700;
+        }
+
+        .bg-physics-box {
+            background: rgba(0, 242, 254, 0.04);
+            border-left: 4px solid #00F2FE;
+        }
+
+        /* Spinning Logo Mandala Container */
+        .logo-mandala-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo-mandala-border {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px dashed rgba(255, 215, 0, 0.6);
+            animation: spinMandala 25s linear infinite;
+        }
+
+        @keyframes spinMandala {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Traditional Jali Overlay */
+        .jali-pattern {
+            background-image: radial-gradient(rgba(212, 175, 55, 0.08) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0F0103; }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #D4AF37, #3B0810);
+            border-radius: 4px;
+        }
+
+        /* Tab buttons active state */
+        .chapter-btn-active {
+            background: linear-gradient(135deg, #3B0810 0%, #220308 100%);
+            border-color: #FFD700;
+            color: #FFD700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="relative min-h-screen">
+
+    <canvas id="emberCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+    <div class="fixed inset-0 jali-pattern pointer-events-none z-0"></div>
+
+    <div class="relative z-10 flex flex-col min-h-screen">
+
+        <header class="sticky top-0 z-50 bg-[#0F0103]/90 backdrop-blur-md border-b border-[#D4AF37]/30 shadow-2xl">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-20">
+                    
+                    <!-- Branding & Logo -->
+                    <a href="index.html" class="flex items-center space-x-4 group">
+                        <div class="logo-mandala-wrapper w-12 h-12 flex items-center justify-center">
+                            <div class="logo-mandala-border"></div>
+                            <img src="Gemini_Generated_Image_qyu3euqyu3euqyu3.png" alt="Vidya Nirman Logo" class="w-10 h-10 rounded-full object-cover shadow-lg border border-[#FFD700]">
+                        </div>
+                        <div>
+                            <span class="font-cinzel text-xl sm:text-2xl font-bold tracking-wider text-gold-gradient block leading-tight">
+                                VIDYA NIRMAN
+                            </span>
+                            <span class="text-xs font-devanagari text-cyan-400 tracking-widest block">
+                                सा विद्या या विमुक्तये • PHYSICS PORTAL
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Navigation Links (Desktop) -->
+                    <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold">
+                        <a href="index.html" class="text-gray-300 hover:text-amber-400 transition">
+                            <i class="fa-solid fa-house mr-1 text-xs"></i> Home
+                        </a>
+                        <a href="#chapters" class="text-amber-300 hover:text-amber-200 transition">
+                            <i class="fa-solid fa-book-open mr-1 text-xs"></i> 5 Vast Chapters
+                        </a>
+                        <a href="#tools" class="text-cyan-400 hover:text-cyan-300 transition">
+                            <i class="fa-solid fa-calculator mr-1 text-xs"></i> Physics Tools
+                        </a>
+                        <a href="#quiz" class="text-amber-400 hover:text-amber-200 transition">
+                            <i class="fa-solid fa-brain mr-1 text-xs"></i> Practice Quiz
+                        </a>
+                    </nav>
+
+                    <!-- Quests & Quick Nav -->
+                    <div class="hidden lg:flex items-center space-x-3">
+                        <a href="physics-quest.html" class="px-4 py-2 rounded-full border border-cyan-500/50 bg-cyan-950/40 text-cyan-300 text-xs font-bold hover:bg-cyan-900/60 transition shadow-lg flex items-center gap-2">
+                            <i class="fa-solid fa-atom animate-spin"></i> Physics Quest
+                        </a>
+                        <a href="grand-quest.html" class="px-4 py-2 rounded-full border border-[#FFD700] bg-gradient-to-r from-amber-700/60 to-red-900/60 text-amber-200 text-xs font-bold hover:brightness-125 transition shadow-lg flex items-center gap-2">
+                            <i class="fa-solid fa-crown text-amber-400"></i> Grand Quest
+                        </a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden flex items-center">
+                        <button id="mobileMenuBtn" class="text-amber-400 hover:text-amber-200 p-2 text-xl focus:outline-none">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Drawer -->
+            <div id="mobileMenu" class="hidden md:hidden bg-[#220308] border-b border-[#D4AF37]/40 px-4 pt-2 pb-6 space-y-3">
+                <a href="index.html" class="block py-2 text-gray-200 hover:text-amber-400 border-b border-amber-900/30">Home Page</a>
+                <a href="#chapters" class="block py-2 text-amber-300 hover:text-amber-100 border-b border-amber-900/30">Class 9th Physics Chapters</a>
+                <a href="#tools" class="block py-2 text-cyan-400 hover:text-cyan-200 border-b border-amber-900/30">Physics Simulators & Calculators</a>
+                <a href="#quiz" class="block py-2 text-amber-400 hover:text-amber-200 border-b border-amber-900/30">Interactive Chapter Quiz</a>
+                <div class="pt-2 flex flex-col gap-2">
+                    <a href="physics-quest.html" class="text-center py-2 rounded bg-cyan-950 border border-cyan-500 text-cyan-300 text-xs font-bold">Physics Quest Module</a>
+                    <a href="grand-quest.html" class="text-center py-2 rounded bg-amber-950 border border-amber-500 text-amber-300 text-xs font-bold">Grand Gurukul Quest</a>
+                </div>
+            </div>
+        </header>
+
+        <section class="relative py-16 px-4 sm:px-6 lg:px-8 border-b border-[#D4AF37]/20 bg-gradient-to-b from-[#220308]/80 via-[#0F0103]/90 to-[#0F0103]">
+            <div class="max-w-6xl mx-auto text-center">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/40 bg-cyan-950/30 text-cyan-300 text-xs font-semibold mb-6">
+                    <i class="fa-solid fa-scroll text-amber-400"></i> Class 9th CBSE & ICSE Physics Exhaustive Encyclopedia
+                </div>
+                
+                <h1 class="text-4xl sm:text-6xl font-extrabold font-cinzel text-gold-gradient mb-6 tracking-tight leading-tight">
+                    PHYSICS (भौतिक शास्त्र)
+                </h1>
+
+                <p class="text-base sm:text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed mb-8">
+                    Welcome to the most complete, vast, and rigorous interactive Physics portal. Explore high-precision mathematical derivations, deep conceptual case studies, solved numerical banks, interactive calculators, and visual wave mechanics mapped strictly to the CBSE & ICSE Class 9 curriculum.
+                </p>
+
+                <!-- Search / Filter Formulas Bar -->
+                <div class="max-w-2xl mx-auto relative">
+                    <input type="text" id="formulaSearchInput" placeholder="Search formulas, derivations, or laws (e.g. Newton, momentum, g=GM/R^2, echo)..." class="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-[#0F0103]/90 border-2 border-[#D4AF37]/50 text-amber-100 placeholder-amber-700/70 focus:outline-none focus:border-cyan-400 transition shadow-2xl">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-4 text-amber-500 text-lg"></i>
+                    <div id="searchQuickResults" class="hidden absolute left-0 right-0 top-full mt-2 bg-[#220308] border border-[#D4AF37]/50 rounded-xl p-4 shadow-2xl text-left z-30 max-h-60 overflow-y-auto"></div>
+                </div>
+            </div>
+        </section>
+
+        <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+            <!-- Chapter Navigation Tabs -->
+            <div id="chapters" class="mb-10">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl sm:text-3xl font-bold font-cinzel text-gold-gradient">
+                        <i class="fa-solid fa-book-bookmark text-cyan-400 mr-2"></i> Select Physics Chapter
+                    </h2>
+                    <p class="text-xs text-gray-400 mt-1">Click on any chapter below to load complete deep explanation, mathematical derivations, diagrams & solved numericals.</p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                    <button onclick="switchChapter(1)" id="tab-btn-1" class="chapter-btn chapter-btn-active p-3.5 rounded-xl border border-[#D4AF37]/30 text-left transition duration-200 flex flex-col justify-between h-24 group">
+                        <div class="flex items-center justify-between w-full">
+                            <span class="text-xs font-bold text-amber-500">CHAPTER 01</span>
+                            <i class="fa-solid fa-person-running text-cyan-400 text-sm"></i>
+                        </div>
+                        <span class="font-bold text-sm leading-tight text-amber-100 group-hover:text-amber-300">Motion</span>
+                    </button>
+
+                    <button onclick="switchChapter(2)" id="tab-btn-2" class="chapter-btn p-3.5 rounded-xl border border-[#D4AF37]/30 text-left transition duration-200 bg-[#220308]/60 text-gray-300 hover:border-amber-400 flex flex-col justify-between h-24 group">
+                        <div class="flex items-center justify-between w-full">
+                            <span class="text-xs font-bold text-amber-500">CHAPTER 02</span>
+                            <i class="fa-solid fa-bow-arrow text-cyan-400 text-sm"></i>
+                        </div>
+                        <span class="font-bold text-sm leading-tight text-amber-100 group-hover:text-amber-300">Force & Laws of Motion</span>
+                    </button>
+
+                    <button onclick="switchChapter(3)" id="tab-btn-3" class="chapter-btn p-3.5 rounded-xl border border-[#D4AF37]/30 text-left transition duration-200 bg-[#220308]/60 text-gray-300 hover:border-amber-400 flex flex-col justify-between h-24 group">
+                        <div class="flex items-center justify-between w-full">
+                            <span class="text-xs font-bold text-amber-500">CHAPTER 03</span>
+                            <i class="fa-solid fa-globe text-cyan-400 text-sm"></i>
+                        </div>
+                        <span class="font-bold text-sm leading-tight text-amber-100 group-hover:text-amber-300">Gravitation & Floatation</span>
+                    </button>
+
+                    <button onclick="switchChapter(4)" id="tab-btn-4" class="chapter-btn p-3.5 rounded-xl border border-[#D4AF37]/30 text-left transition duration-200 bg-[#220308]/60 text-gray-300 hover:border-amber-400 flex flex-col justify-between h-24 group">
+                        <div class="flex items-center justify-between w-full">
+                            <span class="text-xs font-bold text-amber-500">CHAPTER 04</span>
+                            <i class="fa-solid fa-bolt text-cyan-400 text-sm"></i>
+                        </div>
+                        <span class="font-bold text-sm leading-tight text-amber-100 group-hover:text-amber-300">Work, Energy & Power</span>
+                    </button>
+
+                    <button onclick="switchChapter(5)" id="tab-btn-5" class="chapter-btn p-3.5 rounded-xl border border-[#D4AF37]/30 text-left transition duration-200 bg-[#220308]/60 text-gray-300 hover:border-amber-400 flex flex-col justify-between h-24 group col-span-2 sm:col-span-1">
+                        <div class="flex items-center justify-between w-full">
+                            <span class="text-xs font-bold text-amber-500">CHAPTER 05</span>
+                            <i class="fa-solid fa-wave-square text-cyan-400 text-sm"></i>
+                        </div>
+                        <span class="font-bold text-sm leading-tight text-amber-100 group-hover:text-amber-300">Sound Waves & Ear</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- CHAPTER 1: MOTION CONTENT -->
+            <div id="chapter-1" class="chapter-content space-y-10">
+                <div class="bg-gurukul-card p-6 sm:p-8 rounded-2xl border-gold-glow">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6 border-b border-[#D4AF37]/30 pb-4">
+                        <div>
+                            <span class="text-cyan-400 font-semibold text-xs tracking-widest uppercase">Class 9th Physics • Chapter 1</span>
+                            <h2 class="text-3xl font-extrabold font-cinzel text-gold-gradient mt-1">1. Motion in One Dimension & Kinematics</h2>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-amber-950/80 border border-amber-500 text-amber-300 text-xs font-bold">Vast Theory + Derivations</span>
+                    </div>
+
+                    <!-- Theory Section -->
+                    <div class="space-y-6 text-gray-200">
+                        <h3 class="text-xl font-bold text-amber-300 border-b border-amber-900/50 pb-2">1.1 Fundamental Concepts: Rest & Motion</h3>
+                        <p class="leading-relaxed">
+                            An object is said to be in <strong>rest</strong> if its position does not change with respect to its surrounding origin/reference point over time. Conversely, an object is in <strong>motion</strong> if its position continuously changes with respect to a fixed reference frame. Rest and motion are relative terms; a person sitting inside a moving train is at rest relative to fellow passengers, but in motion relative to trees outside.
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                            <div class="p-5 rounded-xl bg-physics-box border-cyan-glow">
+                                <h4 class="font-bold text-cyan-300 mb-2 text-lg"><i class="fa-solid fa-[#00F2FE] fa-arrows-left-right mr-2"></i> Scalar Quantities</h4>
+                                <p class="text-sm text-gray-300 leading-relaxed mb-2">Physical quantities that possess <strong>only magnitude</strong> and no direction.</p>
+                                <ul class="list-disc list-inside text-xs text-cyan-200 space-y-1">
+                                    <li><strong>Examples:</strong> Distance, Speed, Mass, Time, Work, Energy, Density.</li>
+                                    <li><strong>Addition:</strong> Added using simple algebraic rules (e.g., $5\text{ m} + 3\text{ m} = 8\text{ m}$).</li>
+                                </ul>
+                            </div>
+
+                            <div class="p-5 rounded-xl bg-gurukul-card border-gold-glow">
+                                <h4 class="font-bold text-amber-300 mb-2 text-lg"><i class="fa-solid fa-compass mr-2"></i> Vector Quantities</h4>
+                                <p class="text-sm text-gray-300 leading-relaxed mb-2">Physical quantities that require <strong>both magnitude and specific direction</strong> for complete description.</p>
+                                <ul class="list-disc list-inside text-xs text-amber-200 space-y-1">
+                                    <li><strong>Examples:</strong> Displacement, Velocity, Acceleration, Force, Momentum.</li>
+                                    <li><strong>Addition:</strong> Added using vector algebra laws (Triangle/Parallelogram law).</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-amber-300 border-b border-amber-900/50 pb-2 pt-4">1.2 Distance vs Displacement (Deep Comparative Analysis)</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left text-gray-300 border border-amber-900/40 rounded-lg">
+                                <thead class="bg-[#220308] text-amber-400 font-cinzel border-b border-amber-800">
+                                    <tr>
+                                        <th class="p-3">Property</th>
+                                        <th class="p-3">Distance ($s$)</th>
+                                        <th class="p-3">Displacement ($\Delta x$)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-amber-900/30">
+                                    <tr>
+                                        <td class="p-3 font-semibold text-amber-200">Definition</td>
+                                        <td class="p-3">Total length of actual path traversed by body.</td>
+                                        <td class="p-3">Shortest straight line distance between initial and final position.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-semibold text-amber-200">Quantity Type</td>
+                                        <td class="p-3">Scalar</td>
+                                        <td class="p-3">Vector</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-semibold text-amber-200">Possible Values</td>
+                                        <td class="p-3">Always positive ($>0$) for a moving body.</td>
+                                        <td class="p-3">Can be positive, zero, or negative.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-semibold text-amber-200">Circular Motion Case</td>
+                                        <td class="p-3">After 1 round of radius $r$: Distance $= 2\pi r$.</td>
+                                        <td class="p-3">After 1 round: Displacement $= 0$.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-amber-300 border-b border-amber-900/50 pb-2 pt-6">1.3 Derivations of Equations of Motion (Graphical & Algebraic)</h3>
+                        <p class="text-sm text-gray-300">For an object moving along a straight line with uniform acceleration $a$, initial velocity $u$, final velocity $v$, time $t$, and displacement $s$:</p>
+
+                        <!-- Derivation 1 -->
+                        <div class="p-5 rounded-xl bg-derivation-box my-4 space-y-3">
+                            <h4 class="text-lg font-bold text-amber-400">1. First Equation of Motion ($v = u + at$)</h4>
+                            <p class="text-sm text-gray-300"><strong>By Definition of Acceleration:</strong> Acceleration is the rate of change of velocity per unit time.</p>
+                            <div class="p-3 bg-[#0F0103] rounded border border-amber-900/60 font-mono text-cyan-300 text-center">
+                                $$a = \frac{\text{Final Velocity} - \text{Initial Velocity}}{\text{Time}} = \frac{v - u}{t}$$
+                            </div>
+                            <p class="text-sm text-gray-300">Multiplying both sides by $t$ gives $at = v - u$. Rearranging terms:</p>
+                            <div class="p-3 bg-[#220308] text-amber-300 font-bold text-center text-lg rounded border border-amber-500">
+                                $$v = u + at \quad \text{[Derived]}$$
+                            </div>
+                        </div>
+
+                        <!-- Derivation 2 -->
+                        <div class="p-5 rounded-xl bg-derivation-box my-4 space-y-3">
+                            <h4 class="text-lg font-bold text-amber-400">2. Second Equation of Motion ($s = ut + \frac{1}{2}at^2$)</h4>
+                            <p class="text-sm text-gray-300"><strong>Algebraic Proof:</strong> For uniform acceleration, Average Velocity $v_{\text{avg}} = \frac{u + v}{2}$.</p>
+                            <p class="text-sm text-gray-300">Total Distance $s = v_{\text{avg}} \times t = \left(\frac{u + v}{2}\right) \times t$.</p>
+                            <p class="text-sm text-gray-300">Substitute $v = u + at$ into the distance equation:</p>
+                            <div class="p-3 bg-[#0F0103] rounded border border-amber-900/60 font-mono text-cyan-300 text-center">
+                                $$s = \left(\frac{u + (u + at)}{2}\right) \times t = \left(\frac{2u + at}{2}\right) \times t = \left(u + \frac{1}{2}at\right) \times t$$
+                            </div>
+                            <div class="p-3 bg-[#220308] text-amber-300 font-bold text-center text-lg rounded border border-amber-500">
+                                $$s = ut + \frac{1}{2}at^2 \quad \text{[Derived]}$$
+                            </div>
+                        </div>
+
+                        <!-- Derivation 3 -->
+                        <div class="p-5 rounded-xl bg-derivation-box my-4 space-y-3">
+                            <h4 class="text-lg font-bold text-amber-400">3. Third Equation of Motion ($v^2 = u^2 + 2as$)</h4>
+                            <p class="text-sm text-gray-300">From the first equation $v = u + at \implies t = \frac{v - u}{a}$.</p>
+                            <p class="text-sm text-gray-300">Substitute $t$ into $s = v_{\text{avg}} \times t$:</p>
+                            <div class="p-3 bg-[#0F0103] rounded border border-amber-900/60 font-mono text-cyan-300 text-center">
+                                $$s = \left(\frac{v + u}{2}\right) \left(\frac{v - u}{a}\right) = \frac{v^2 - u^2}{2a}$$
+                            </div>
+                            <p class="text-sm text-gray-300">Cross-multiplying $2a$ gives $2as = v^2 - u^2$. Thus:</p>
+                            <div class="p-3 bg-[#220308] text-amber-300 font-bold text-center text-lg rounded border border-amber-500">
+                                $$v^2 = u^2 + 2as \quad \text{[Derived]}$$
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-amber-300 border-b border-amber-900/50 pb-2 pt-6">1.4 Uniform Circular Motion</h3>
+                        <p class="leading-relaxed">
+                            When an object moves along a circular path with constant speed, its direction changes continuously at every point. Since direction changes, velocity vector changes, making circular motion an <strong>accelerated motion</strong> even if magnitude of speed remains unchanged.
+                        </p>
+                        <div class="p-4 bg-physics-box rounded-xl border border-cyan-500/40 text-center">
+                            <p class="text-cyan-300 font-bold">Speed in Circular Motion Formula:</p>
+                            <p class="text-xl text-amber-300 font-mono my-2">$$v = \frac{2\pi r}{T}$$</p>
+                            <p class="text-xs text-gray-300">Where $r$ = radius of circular track, $T$ = time taken for 1 complete revolution.</p>
+                        </div>
+
+                        <!-- Solved Numericals Bank Chapter 1 -->
+                        <h3 class="text-xl font-bold text-cyan-300 border-b border-cyan-900/50 pb-2 pt-6"><i class="fa-solid fa-calculator mr-2"></i> Solved Numerical Problem Bank</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-xl bg-[#220308]/90 border border-amber-500/30">
+                                <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-xs">Numerical 1.1</span>
+                                <p class="text-sm font-semibold text-gray-200 mt-2">A racing car accelerates uniformly from rest at $4\text{ m/s}^2$. What distance will it cover in $10\text{ seconds}$ after start?</p>
+                                <div class="mt-2 p-3 bg-[#0F0103] rounded text-xs space-y-1 text-gray-300">
+                                    <p><strong>Given:</strong> Initial velocity $u = 0$, acceleration $a = 4\text{ m/s}^2$, time $t = 10\text{ s}$.</p>
+                                    <p><strong>Formula:</strong> $s = ut + \frac{1}{2}at^2$</p>
+                                    <p><strong>Calculation:</strong> $s = (0)(10) + \frac{1}{2}(4)(10)^2 = 0 + 2 \times 100 = 200\text{ meters}$.</p>
+                                    <p class="text-amber-400 font-bold">Answer: $200\text{ m}$.</p>
+                                </div>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-[#220308]/90 border border-amber-500/30">
+                                <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-xs">Numerical 1.2</span>
+                                <p class="text-sm font-semibold text-gray-200 mt-2">A train moving at $90\text{ km/h}$ applies brakes to produce a uniform deceleration of $-0.5\text{ m/s}^2$. How far will the train go before coming to rest?</p>
+                                <div class="mt-2 p-3 bg-[#0F0103] rounded text-xs space-y-1 text-gray-300">
+                                    <p><strong>Given:</strong> $u = 90\text{ km/h} = 90 \times \frac{5}{18} = 25\text{ m/s}$, final velocity $v = 0$, $a = -0.5\text{ m/s}^2$.</p>
+                                    <p><strong>Formula:</strong> $v^2 = u^2 + 2as \implies 0^2 = (25)^2 + 2(-0.5)s$</p>
+                                    <p><strong>Calculation:</strong> $0 = 625 - 1s \implies s = 625\text{ m}$.</p>
+                                    <p class="text-amber-400 font-bold">Answer: Distance covered before rest $= 625\text{ meters}$.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAPTER 2: FORCE & LAWS OF MOTION CONTENT -->
+            <div id="chapter-2" class="chapter-content hidden space-y-10">
+                <div class="bg-gurukul-card p-6 sm:p-8 rounded-2xl border-gold-glow">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6 border-b border-[#D4AF37]/30 pb-4">
+                        <div>
+                            <span class="text-cyan-400 font-semibold text-xs tracking-widest uppercase">Class 9th Physics • Chapter 2</span>
+                            <h2 class="text-3xl font-extrabold font-cinzel text-gold-gradient mt-1">2. Force, Dynamics & Laws of Motion</h2>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-amber-950/80 border border-amber-500 text-amber-300 text-xs font-bold">Vast Dynamics Theory</span>
+                    </div>
+
+                    <div class="space-y-6 text-gray-200">
+                        <h3 class="text-xl font-bold text-amber-300 border-b border-amber-900/50 pb-2">2.1 Concept of Force & Inertia</h3>
+                        <p class="leading-relaxed">
+                            <strong>Force</strong> is an external push or pull acting on a body that changes or tends to change its state of rest, uniform motion, direction, or shape. 
+                        </p>
+
+                        <div class="p-4 bg-physics-box rounded-xl border border-cyan-500/30">
+                            <h4 class="font-bold text-cyan-300 text-base mb-2"><i class="fa-solid fa-shield mr-2"></i> What is Inertia?</h4>
+                            <p class="text-sm text-gray-300 leading-relaxed">
+                                Inertia is the inherent property of a body by virtue of which it resists any change in its state of rest or uniform motion in a straight line. <strong>Mass is the quantitative measure of inertia.</strong> Higher mass $\implies$ Higher Inertia.
+                            </p>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4 text-xs">
+                                <div class="p-3 bg-[#0F0103] rounded border border-amber-900/40">
+                                    <strong class="text-amber-300 block mb-1">Inertia of Rest</strong>
+                                    Passenger jerks backwards when bus suddenly starts.
+                                </div>
+                                <div class="p-3 bg-[#0F0103] rounded border border-amber-900/40">
+                                    <strong class="text-amber-300 block mb-1">Inertia of Motion</strong>
+                                    Passenger leans forward when brakes are applied suddenly.
+                                </div>
+                                <div class="p-3 bg-[#0F0103] rounded border border-amber-900/40">
+                                    <strong class="text-amber-300 block mb-1">Inertia of Direction</strong>
+                                    Mud flies off tangentially from a rotating vehicle wheel.
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-amber-300 border-b border-amber-900/50 pb-2 pt-4">2.2 Newton's Three Laws of Motion</h3>
+
+                        <!-- First Law -->
+                        <div class="p-5 bg-gurukul-card rounded-xl border border-amber-500/40 space-y-2">
+                            <h4 class="text-lg font-bold text-amber-400"><i class="fa-solid fa-1 mr-2 text-cyan-400"></i> Newton's First Law (Law of Inertia)</h4>
+                            <p class="text-sm text-gray-300 italic">"An object remains in a state of rest or of uniform motion in a straight line unless acted upon by an external unbalanced force."</p>
+                        </div>
+
+                        <!-- Second Law + Derivation -->
+                        <div class="p-5 bg-derivation-box rounded-xl space-y-3">
+                            <h4 class="text-lg font-bold text-amber-400"><i class="fa-solid fa-2 mr-2 text-cyan-400"></i> Newton's Second Law & Mathematical Derivation ($F = ma$)</h4>
+                            <p class="text-sm text-gray-300 italic">"The rate of change of momentum of a body is directly proportional to the applied unbalanced force and takes place in the direction in which the force acts."</p>
+
+                            <p class="text-sm text-gray-300 mt-2"><strong>Linear Momentum ($p$):</strong> Product of mass $m$ and velocity $v$ ($p = mv$). SI unit: $\text{kg}\cdot\text{m/s}$.</p>
+                            <p class="text-sm text-gray-300">Initial momentum $p_1 = mu$, Final momentum $p_2 = mv$. Change in momentum $\Delta p = mv - mu = m(v - u)$.</p>
+
+                            <div class="p-3 bg-[#0F0103] rounded border border-amber-900/60 font-mono text-cyan-300 text-center">
+                                $$\text{Force } F \propto \frac{\Delta p}{t} \implies F \propto \frac{m(v - u)}{t}$$
+                            </div>
+                            <p class="text-sm text-gray-300">Since $\frac{v - u}{t} = a$ (acceleration): $F \propto m \cdot a \implies F = k \cdot m \cdot a$. By defining 1 Newton such that constant $k = 1$:</p>
+
+                            <div class="p-3 bg-[#220308] text-amber-300 font-bold text-center text-lg rounded border border-amber-500">
+                                $$F = m \cdot a \quad \text{[SI Unit: Newton (N) = 1 kg}\cdot\text{m/s}^2\text{]}$$
+                            </div>
+                        </div>
+
+                        <!-- Third Law -->
+                        <div class="p-5 bg-gurukul-card rounded-xl border border-amber-500/40 space-y-2">
+                            <h4 class="text-lg font-bold text-amber-400"><i class="fa-solid fa-3 mr-2 text-cyan-400"></i> Newton's Third Law of Motion</h4>
+                            <p class="text-sm text-gray-300 italic">"To every action, there is an equal and opposite reaction, and they act on two different bodies simultaneously."</p>
+                            <p class="text-xs text-amber-200 mt-2">$$\vec{F}_{AB} = -\vec{F}_{BA}$$</p>
+                            <p class="text-xs text-gray-400">Examples: Rocket propulsion, walking on ground, recoil velocity of gun when bullet fired.</p>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-amber-300 border-b border-amber-900/50 pb-2 pt-6">2.3 Law of Conservation of Momentum (Complete Proof)</h3>
+                        <div class="p-5 bg-derivation-box rounded-xl space-y-3">
+                            <p class="text-sm text-gray-300">Consider two objects $A$ and $B$ of masses $m_1$ and $m_2$ colliding with initial velocities $u_1, u_2$ and final velocities $v_1, v_2$ after collision time $t$.</p>
+                            <p class="text-sm text-gray-300">Force exerted by $A$ on $B$: $F_{AB} = m_2 \left(\frac{v_2 - u_2}{t}\right)$.</p>
+                            <p class="text-sm text-gray-300">Force exerted by $B$ on $A$: $F_{BA} = m_1 \left(\frac{v_1 - u_1}{t}\right)$.</p>
+                            <p class="text-sm text-gray-300">According to Newton's Third Law ($F_{AB} = -F_{BA}$):</p>
+                            <div class="p-3 bg-[#0F0103] rounded border border-amber-900/60 font-mono text-cyan-300 text-center">
+                                $$m_2 \left(\frac{v_2 - u_2}{t}\right) = -m_1 \left(\frac{v_1 - u_1}{t}\right)$$
+                            </div>
+                            <p class="text-sm text-gray-300">Cancelling $t$ and expanding: $m_2 v_2 - m_2 u_2 = -m_1 v_1 + m_1 u_1$. Rearranging initial and final terms:</p>
+                            <div class="p-3 bg-[#220308] text-amber-300 font-bold text-center text-lg rounded border border-amber-500">
+                                $$m_1 u_1 + m_2 u_2 = m_1 v_1 + m_2 v_2 \quad \text{[Total Momentum Conserved]}$$
+                            </div>
+                        </div>
+
+                        <!-- Solved Numericals Bank Chapter 2 -->
+                        <h3 class="text-xl font-bold text-cyan-300 border-b border-cyan-900/50 pb-2 pt-6"><i class="fa-solid fa-calculator mr-2"></i> Solved Numerical Bank</h3>
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-xl bg-[#220308]/90 border border-amber-500/30">
+                                <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-xs">Numerical 2.1 (Gun Recoil)</span>
+                                <p class="text-sm font-semibold text-gray-200 mt-2">A bullet of mass $20\text{ g}$ is horizontally fired with velocity $150\text{ m/s}$ from a pistol of mass $2\text{ kg}$. What is the recoil velocity of pistol?</p>
+                                <div class="mt-2 p-3 bg-[#0F0103] rounded text-xs space-y-1 text-gray-300">
+                                    <p><strong>Given:</strong> $m_1 = 0.02\text{ kg}$, $v_1 = 150\text{ m/s}$, $m_2 = 2\text{ kg}$, initial momentum $= 0$.</p>
+                                    <p><strong>Formula:</strong> Total final momentum $= 0 \implies m_1 v_1 + m_2 v_2 = 0 \implies v_2 = -\frac{m_1 v_1}{m_2}$.</p>
+                                    <p><strong>Calculation:</strong> $v_2 = -\frac{0.02 \times 150}{2} = -\frac{3}{2} = -1.5\text{ m/s}$.</p>
+                                    <p class="text-amber-400 font-bold">Answer: Recoil velocity $= -1.5\text{ m/s}$ (opposite direction).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAPTER 3: GRAVITATION & FLOATATION CONTENT -->
+            <div id="chapter-3" class="chapter-content hidden space-y-10">
+                <div class="bg-gurukul-card p-6 sm:p-8 rounded-2xl border-gold-glow">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6 border-b border-[#D4AF37]/30 pb-4">
+                        <div>
+                            <span class="text-cyan-400 font-semibold text-xs tracking-widest uppercase">Class 9th Physics • Chapter 3</span>
+                            <h2 class="text-3xl font-extrabold font-cinzel text-gold-gradient mt-1">3. Universal Gravitation & Floatation Hydrostatics</h2>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-amber-950/80 border border-amber-500 text-amber-300 text-xs font-bold">Vast Astrophysics & Fluids</span>
+                    </div>
+
+                    <div class="space-y-6 text-gray-200">
+                        <h3 class="text-xl font-bold text-amber-300 border-b border-amber-900/50 pb-2">3.1 Universal Law of Gravitation</h3>
+                        <p class="leading-relaxed">
+                            Every particle in the universe attracts every other particle with a force directly proportional to the product of their masses and inversely proportional to the square of the distance between their centers.
+                        </p>
+                        <div class="p-5 bg-derivation-box rounded-xl space-y-2 text-center">
+                            <p class="text-xl font-bold text-amber-300">$$F = G \frac{m_1 m_2}{r^2}$$</p>
+                            <p class="text-xs text-gray-300">Where Universal Gravitational Constant $G = 6.673 \times 10^{-11}\text{ N}\cdot\text{m}^2/\text{kg}^2$ (measured by Henry Cavendish).</p>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-amber-300 border-b border-amber-900/50 pb-2 pt-4">3.2 Acceleration Due to Gravity ($g$) & Mass vs Weight</h3>
+                        <p class="text-sm text-gray-300"><strong>Derivation of $g$:</strong> Consider a body of mass $m$ on Earth's surface of mass $M$ and radius $R$.</p>
+                        <p class="text-sm text-gray-300">Gravitational Force $F = \frac{G M m}{R^2}$. By Newton's Second Law, $F = mg$. Equating both:</p>
+                        <div class="p-3 bg-[#0F0103] rounded border border-amber-900/60 font-mono text-cyan-300 text-center my-3">
+                            $$m g = \frac{G M m}{R^2} \implies g = \frac{G M}{R^2} = 9.8\text{ m/s}^2 \quad \text{(On Earth's surface)}$$
+                        </div>
+
+                        <div class="p-4 bg-physics-box rounded-xl border border-cyan-500/30">
+                            <h4 class="font-bold text-cyan-300 text-base mb-2">Mathematical Proof: Weight of Object on Moon</h4>
+                            <p class="text-xs text-gray-300 leading-relaxed mb-2">Mass of Moon $M_m = \frac{1}{100} M_e$, Radius of Moon $R_m = \frac{1}{4} R_e$.</p>
+                            <p class="text-xs font-mono text-amber-300">$$W_{\text{moon}} = \frac{G M_m m}{R_m^2} = \frac{G (M_e/100) m}{(R_e/4)^2} = \frac{16}{100} \frac{G M_e m}{R_e^2} \approx \frac{1}{6} W_{\text{earth}}$$</p>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-amber-300 border-b border-amber-900/50 pb-2 pt-6">3.3 Thrust, Pressure & Archimedes' Principle</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 bg-gurukul-card rounded-xl border border-amber-900/50">
+                                <h4 class="font-bold text-amber-400 mb-1">Thrust & Pressure</h4>
+                                <p class="text-xs text-gray-300">$\text{Pressure } P = \frac{\text{Thrust (Perpendicular Force)}}{\text{Area} (A)}$. SI unit: Pascal ($\text{Pa} = \text{N/m}^2$). Smaller area $\implies$ Higher pressure (e.g., sharp needle punctures easily).</p>
+                            </div>
+                            <div class="p-4 bg-gurukul-card rounded-xl border border-amber-900/50">
+                                <h4 class="font-bold text-amber-400 mb-1">Archimedes' Principle</h4>
+                                <p class="text-xs text-gray-300">"When a body is fully or partially immersed in a fluid, it experiences an upward buoyant force equal to the weight of fluid displaced by it."</p>
+                            </div>
+                        </div>
+
+                        <!-- Solved Numericals Bank Chapter 3 -->
+                        <h3 class="text-xl font-bold text-cyan-300 border-b border-cyan-900/50 pb-2 pt-6"><i class="fa-solid fa-calculator mr-2"></i> Solved Numerical Bank</h3>
+                        <div class="p-4 rounded-xl bg-[#220308]/90 border border-amber-500/30">
+                            <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 font-bold text-xs">Numerical 3.1</span>
+                            <p class="text-sm font-semibold text-gray-200 mt-2">A stone is dropped from top of a $19.6\text{ m}$ high tower. Calculate its final velocity just before touching ground ($g = 9.8\text{ m/s}^2$).</p>
+                            <div class="mt-2 p-3 bg-[#0F0103] rounded text-xs space-y-1 text-gray-300">
+                                <p><strong>Given:</strong> $u = 0$, $s = 19.6\text{ m}$, $g = +9.8\text{ m/s}^2$.</p>
+                                <p><strong>Formula:</strong> $v^2 = u^2 + 2gs = 0 + 2(9.8)(19.6) = (19.6)^2$.</p>
+                                <p class="text-amber-400 font-bold">Answer: $v = 19.6\text{ m/s}$.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAPTER 4: WORK, ENERGY & POWER CONTENT -->
+            <div id="chapter-4" class="chapter-content hidden space-y-10">
+                <div class="bg-gurukul-card p-6 sm:p-8 rounded-2xl border-gold-glow">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6 border-b border-[#D4AF37]/30 pb-4">
+                        <div>
+                            <span class="text-cyan-400 font-semibold text-xs tracking-widest uppercase">Class 9th Physics • Chapter 4</span>
+                            <h2 class="text-3xl font-extrabold font-cinzel text-gold-gradient mt-1">4. Work, Kinetic/Potential Energy & Power</h2>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-amber-950/80 border border-amber-500 text-amber-300 text-xs font-bold">Vast Thermodynamics & Work Mechanics</span>
+                    </div>
+
+                    <div class="space-y-6 text-gray-200">
+                        <h3 class="text-xl font-bold text-amber-300 border-b border-amber-900/50 pb-2">4.1 Scientific Concept of Work</h3>
+                        <p class="leading-relaxed">
+                            Work is said to be done by a force acting on an object when there is a displacement in the direction of force. 
+                            $$\text{Work } W = F \cdot s \cdot \cos\theta$$
+                            SI Unit of Work is <strong>Joule ($\text{J}$)</strong>: $1\text{ Joule} = 1\text{ Newton} \times 1\text{ meter}$.
+                        </p>
+
+                        <h3 class="text-xl font-bold text-amber-300 border-b border-amber-900/50 pb-2 pt-4">4.2 Kinetic Energy Derivation ($E_k = \frac{1}{2}mv^2$)</h3>
+                        <div class="p-5 bg-derivation-box rounded-xl space-y-3">
+                            <p class="text-sm text-gray-300">Consider an object of mass $m$ initially at rest ($u=0$). A force $F$ accelerates it uniformly to velocity $v$ over displacement $s$.</p>
+                            <p class="text-sm text-gray-300">Work done $W = F \cdot s = (ma) \cdot s$. From third equation $v^2 = u^2 + 2as \implies s = \frac{v^2}{2a}$ (since $u=0$).</p>
+                            <div class="p-3 bg-[#0F0103] rounded border border-amber-900/60 font-mono text-cyan-300 text-center">
+                                $$W = (m a) \times \left(\frac{v^2}{2a}\right) = \frac{1}{2} m v^2$$
+                            </div>
+                            <div class="p-3 bg-[#220308] text-amber-300 font-bold text-center text-lg rounded border border-amber-500">
+                                $$E_k = \frac{1}{2} m v^2 \quad \text{[Derived]}$$
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-amber-300 border-b border-amber-900/50 pb-2 pt-6">4.3 Proof of Conservation of Energy (Free Fall Body)</h3>
+                        <p class="text-sm text-gray-300">Total Mechanical Energy $E = E_k + E_p$ remains constant at all points during free fall of mass $m$ from height $h$:</p>
+                        <ul class="list-disc list-inside text-xs space-y-2 text-gray-300 p-4 bg-physics-box rounded-xl border border-cyan-500/30">
+                            <li><strong>At Top Point A ($height = h, v=0$):</strong> $E_k = 0, E_p = mgh \implies E_{\text{total}} = mgh$.</li>
+                            <li><strong>At Mid Point B ($fallen\ distance\ x$):</strong> $v^2 = 2gx \implies E_k = \frac{1}{2}m(2gx) = mgx$. $E_p = mg(h-x)$. Total $= mgx + mgh - mgx = mgh$.</li>
+                            <li><strong>At Ground Point C ($height = 0$):</strong> $v^2 = 2gh \implies E_k = mgh, E_p = 0 \implies E_{\text{total}} = mgh$.</li>
+                        </ul>
+
+                        <h3 class="text-xl font-bold text-amber-300 border-b border-amber-900/50 pb-2 pt-4">4.4 Power & Commercial Energy Unit</h3>
+                        <p class="text-sm text-gray-300">Power is the rate of doing work: $P = \frac{W}{t}$. SI Unit: Watt ($\text{W} = \text{J/s}$).</p>
+                        <div class="p-4 bg-gurukul-card rounded-xl border border-amber-500/40 text-center">
+                            <span class="text-amber-400 font-bold text-sm">Commercial Energy Conversion Proof:</span>
+                            <p class="text-lg font-mono text-cyan-300 my-1">$$1\text{ kWh} = 1000\text{ W} \times 3600\text{ s} = 3.6 \times 10^6\text{ Joules}$$</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAPTER 5: SOUND CONTENT -->
+            <div id="chapter-5" class="chapter-content hidden space-y-10">
+                <div class="bg-gurukul-card p-6 sm:p-8 rounded-2xl border-gold-glow">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6 border-b border-[#D4AF37]/30 pb-4">
+                        <div>
+                            <span class="text-cyan-400 font-semibold text-xs tracking-widest uppercase">Class 9th Physics • Chapter 5</span>
+                            <h2 class="text-3xl font-extrabold font-cinzel text-gold-gradient mt-1">5. Sound Wave Mechanics, Echo & Ear Structure</h2>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-amber-950/80 border border-amber-500 text-amber-300 text-xs font-bold">Vast Acoustics & Human Physiology</span>
+                    </div>
+
+                    <div class="space-y-6 text-gray-200">
+                        <h3 class="text-xl font-bold text-amber-300 border-b border-amber-900/50 pb-2">5.1 Production & Propagation of Longitudinal Sound Waves</h3>
+                        <p class="leading-relaxed">
+                            Sound is a form of mechanical energy that propagates as longitudinal pressure waves consisting of alternating <strong>Compressions ($C$)</strong> (high density/pressure) and <strong>Rarefactions ($R$)</strong> (low density/pressure) requiring a material medium.
+                        </p>
+
+                        <div class="p-4 bg-physics-box rounded-xl border border-cyan-500/30 text-center">
+                            <p class="text-cyan-300 font-bold text-sm">Fundamental Wave Equation:</p>
+                            <p class="text-2xl font-mono text-amber-300 my-2">$$v = f \cdot \lambda \quad \text{or} \quad v = \frac{\lambda}{T}$$</p>
+                            <p class="text-xs text-gray-300">Where $v$ = Speed of wave, $f$ = Frequency ($\text{Hz}$), $\lambda$ = Wavelength ($\text{m}$), $T$ = Time Period ($\text{s}$).</p>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-amber-300 border-b border-amber-900/50 pb-2 pt-4">5.2 Reflection, Echo & Minimum Distance Calculation</h3>
+                        <p class="text-sm text-gray-300">
+                            An <strong>Echo</strong> is the repetition of sound caused by reflection from a hard surface. The persistence of hearing in the human brain lasts for approximately $0.1\text{ seconds}$.
+                        </p>
+                        <div class="p-5 bg-derivation-box rounded-xl space-y-2">
+                            <h4 class="font-bold text-amber-400 text-sm">Mathematical Calculation for Minimum Distance of Echo:</h4>
+                            <p class="text-xs text-gray-300">Speed of sound in air at $22^\circ\text{C} = 344\text{ m/s}$. Time threshold $t = 0.1\text{ s}$.</p>
+                            <p class="text-xs text-gray-300">Total distance travelled by sound to obstacle and back $2d = v \times t = 344 \times 0.1 = 34.4\text{ m}$.</p>
+                            <div class="p-2 bg-[#0F0103] rounded text-center text-amber-300 font-bold text-sm border border-amber-500/50">
+                                $$d = \frac{34.4}{2} = 17.2\text{ meters} \quad \text{[Minimum distance for distinct echo]}$$
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-amber-300 border-b border-amber-900/50 pb-2 pt-6">5.3 Applications of Ultrasound & SONAR</h3>
+                        <p class="text-sm text-gray-300">Ultrasound refers to sound frequencies above $20,000\text{ Hz} (20\text{ kHz})$.</p>
+                        <div class="p-4 bg-gurukul-card rounded-xl border border-amber-900/50">
+                            <h4 class="font-bold text-cyan-300 text-sm mb-1"><i class="fa-solid fa-ship mr-2"></i> SONAR (Sound Navigation and Ranging)</h4>
+                            <p class="text-xs text-gray-300">Used to measure underwater depth of seas or detect submerged submarines. Transmitter emits ultrasonic pulses; receiver detects reflected echo.</p>
+                            <p class="text-sm font-mono text-amber-300 mt-2 text-center">$$2 d = v \cdot t \implies d = \frac{v \cdot t}{2}$$</p>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-amber-300 border-b border-amber-900/50 pb-2 pt-6">5.4 Detailed Structure & Functioning of Human Ear</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                            <div class="p-4 bg-[#0F0103] rounded-xl border border-amber-900/40">
+                                <h4 class="font-bold text-amber-300 text-sm mb-2">1. Outer Ear</h4>
+                                <p class="text-gray-300">Consists of <strong>Pinna</strong> which collects sound waves and directs them through the <strong>Auditory Canal</strong> toward the eardrum.</p>
+                            </div>
+                            <div class="p-4 bg-[#0F0103] rounded-xl border border-amber-900/40">
+                                <h4 class="font-bold text-amber-300 text-sm mb-2">2. Middle Ear</h4>
+                                <p class="text-gray-300">Contains the <strong>Tympanic Membrane (Eardrum)</strong> and 3 tiny ossicles bones: <strong>Hammer (Malleus), Anvil (Incus), Stirrup (Stapes)</strong> which amplify vibrations 20x.</p>
+                            </div>
+                            <div class="p-4 bg-[#0F0103] rounded-xl border border-amber-900/40">
+                                <h4 class="font-bold text-amber-300 text-sm mb-2">3. Inner Ear</h4>
+                                <p class="text-gray-300">Contains fluid-filled spiral <strong>Cochlea</strong>. Hair cells convert mechanical pressure waves into electrical nerve impulses sent to brain via <strong>Auditory Nerve</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section id="tools" class="mt-16 bg-gurukul-card p-6 sm:p-8 rounded-2xl border-cyan-glow">
+                <div class="text-center mb-8">
+                    <span class="px-3 py-1 rounded-full bg-cyan-950 border border-cyan-500 text-cyan-300 text-xs font-bold">INTERACTIVE PHYSICS LABORATORY</span>
+                    <h2 class="text-3xl font-extrabold font-cinzel text-cyan-gradient mt-2">Class 9th Physics Simulators & Solvers</h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    
+                    <!-- Kinematics Solver -->
+                    <div class="p-6 bg-[#0F0103] rounded-xl border border-amber-900/60 shadow-xl space-y-4">
+                        <h3 class="text-lg font-bold text-amber-300 flex items-center gap-2">
+                            <i class="fa-solid fa-gauge-high text-cyan-400"></i> Interactive Kinematics Equation Solver
+                        </h3>
+                        <p class="text-xs text-gray-400">Input values to instantly compute final velocity ($v$) and displacement ($s$).</p>
+                        
+                        <div class="grid grid-cols-3 gap-3 text-xs">
+                            <div>
+                                <label class="block text-gray-300 font-semibold mb-1">u (m/s)</label>
+                                <input type="number" id="kin-u" value="0" class="w-full p-2.5 rounded bg-[#220308] border border-amber-900 text-amber-200">
+                            </div>
+                            <div>
+                                <label class="block text-gray-300 font-semibold mb-1">a (m/s²)</label>
+                                <input type="number" id="kin-a" value="9.8" class="w-full p-2.5 rounded bg-[#220308] border border-amber-900 text-amber-200">
+                            </div>
+                            <div>
+                                <label class="block text-gray-300 font-semibold mb-1">t (s)</label>
+                                <input type="number" id="kin-t" value="5" class="w-full p-2.5 rounded bg-[#220308] border border-amber-900 text-amber-200">
+                            </div>
+                        </div>
+
+                        <button onclick="calculateKinematics()" class="w-full py-2.5 rounded-lg bg-gradient-to-r from-amber-600 to-amber-800 text-amber-100 font-bold text-xs hover:brightness-125 transition">
+                            Compute Motion Parameters
+                        </button>
+
+                        <div id="kin-result" class="p-3 bg-[#220308] rounded border border-cyan-500/40 text-xs space-y-1 text-cyan-200 font-mono">
+                            <p>Final Velocity ($v$): <span id="res-v" class="text-amber-400 font-bold">49.00 m/s</span></p>
+                            <p>Displacement ($s$): <span id="res-s" class="text-amber-400 font-bold">122.50 m</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Universal Planet Weight Calculator -->
+                    <div class="p-6 bg-[#0F0103] rounded-xl border border-amber-900/60 shadow-xl space-y-4">
+                        <h3 class="text-lg font-bold text-amber-300 flex items-center gap-2">
+                            <i class="fa-solid fa-planet-ring-body text-cyan-400"></i> Universal Planet Weight Calculator
+                        </h3>
+                        <p class="text-xs text-gray-400">Calculate how heavy an object feels on other celestial bodies ($W = m \cdot g$).</p>
+
+                        <div class="grid grid-cols-2 gap-3 text-xs">
+                            <div>
+                                <label class="block text-gray-300 font-semibold mb-1">Mass on Earth (kg)</label>
+                                <input type="number" id="planet-mass" value="60" class="w-full p-2.5 rounded bg-[#220308] border border-amber-900 text-amber-200">
+                            </div>
+                            <div>
+                                <label class="block text-gray-300 font-semibold mb-1">Select Planet/Moon</label>
+                                <select id="planet-select" class="w-full p-2.5 rounded bg-[#220308] border border-amber-900 text-amber-200">
+                                    <option value="1.62">Moon (g = 1.62 m/s²)</option>
+                                    <option value="3.71">Mars (g = 3.71 m/s²)</option>
+                                    <option value="24.79">Jupiter (g = 24.79 m/s²)</option>
+                                    <option value="8.87">Venus (g = 8.87 m/s²)</option>
+                                    <option value="10.44">Saturn (g = 10.44 m/s²)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button onclick="calculatePlanetWeight()" class="w-full py-2.5 rounded-lg bg-gradient-to-r from-cyan-600 to-cyan-800 text-cyan-100 font-bold text-xs hover:brightness-125 transition">
+                            Calculate Weight on Celestial Body
+                        </button>
+
+                        <div id="planet-result" class="p-3 bg-[#220308] rounded border border-amber-500/40 text-xs space-y-1 text-amber-200 font-mono">
+                            <p>Weight on Body: <span id="res-planet-w" class="text-cyan-400 font-bold">97.20 N</span></p>
+                            <p>Equivalent Mass Feel: <span id="res-planet-m" class="text-cyan-400 font-bold">9.92 kg</span></p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section id="quiz" class="mt-16 bg-gurukul-card p-6 sm:p-8 rounded-2xl border-gold-glow">
+                <div class="text-center mb-8">
+                    <span class="px-3 py-1 rounded-full bg-amber-950 border border-amber-500 text-amber-300 text-xs font-bold">TEST YOUR UNDERSTANDING</span>
+                    <h2 class="text-3xl font-extrabold font-cinzel text-gold-gradient mt-2">Class 9th Physics Practice Quiz</h2>
+                </div>
+
+                <div id="quizContainer" class="max-w-3xl mx-auto space-y-6">
+                    
+                    <!-- Question 1 -->
+                    <div class="p-5 rounded-xl bg-[#0F0103] border border-amber-900/50 space-y-3">
+                        <span class="text-xs font-bold text-amber-500">QUESTION 1 • MOTION</span>
+                        <p class="text-sm font-semibold text-gray-200">What is the displacement of an athlete completing 2.5 rounds of a circular track of radius $r$?</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                            <button onclick="checkAnswer(this, false, 'q1-exp')" class="p-2.5 rounded bg-[#220308] hover:border-amber-400 border border-transparent text-left text-gray-300">$5\pi r$</button>
+                            <button onclick="checkAnswer(this, true, 'q1-exp')" class="p-2.5 rounded bg-[#220308] hover:border-amber-400 border border-transparent text-left text-gray-300">$2r$ (Diameter)</button>
+                            <button onclick="checkAnswer(this, false, 'q1-exp')" class="p-2.5 rounded bg-[#220308] hover:border-amber-400 border border-transparent text-left text-gray-300">$0$</button>
+                            <button onclick="checkAnswer(this, false, 'q1-exp')" class="p-2.5 rounded bg-[#220308] hover:border-amber-400 border border-transparent text-left text-gray-300">$2\pi r$</button>
+                        </div>
+                        <div id="q1-exp" class="hidden p-3 rounded bg-amber-950/60 border border-amber-500/40 text-xs text-amber-200">
+                            <strong>Explanation:</strong> After 2 full rounds, displacement is $0$. After the remaining 0.5 round, the athlete is diametrically opposite to start, making displacement $= 2r$.
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="p-5 rounded-xl bg-[#0F0103] border border-amber-900/50 space-y-3">
+                        <span class="text-xs font-bold text-cyan-400">QUESTION 2 • GRAVITATION</span>
+                        <p class="text-sm font-semibold text-gray-200">If the distance between two masses is doubled, the gravitational force between them becomes:</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                            <button onclick="checkAnswer(this, false, 'q2-exp')" class="p-2.5 rounded bg-[#220308] hover:border-amber-400 border border-transparent text-left text-gray-300">Double ($2F$)</button>
+                            <button onclick="checkAnswer(this, false, 'q2-exp')" class="p-2.5 rounded bg-[#220308] hover:border-amber-400 border border-transparent text-left text-gray-300">Half ($F/2$)</button>
+                            <button onclick="checkAnswer(this, true, 'q2-exp')" class="p-2.5 rounded bg-[#220308] hover:border-amber-400 border border-transparent text-left text-gray-300">One-fourth ($F/4$)</button>
+                            <button onclick="checkAnswer(this, false, 'q2-exp')" class="p-2.5 rounded bg-[#220308] hover:border-amber-400 border border-transparent text-left text-gray-300">Four times ($4F$)</button>
+                        </div>
+                        <div id="q2-exp" class="hidden p-3 rounded bg-cyan-950/60 border border-cyan-500/40 text-xs text-cyan-200">
+                            <strong>Explanation:</strong> Force follows inverse-square law $F \propto \frac{1}{r^2}$. Doubling distance ($2r$) makes force $\frac{1}{(2)^2} = \frac{1}{4}$th.
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="mt-auto bg-[#0F0103] border-t border-[#D4AF37]/30 text-gray-400 py-10 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-xs">
+                
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <img src="Gemini_Generated_Image_qyu3euqyu3euqyu3.png" alt="Vidya Nirman Logo" class="w-8 h-8 rounded-full border border-amber-400">
+                        <span class="font-cinzel text-lg font-bold text-gold-gradient">VIDYA NIRMAN</span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed">
+                        Dedicated to traditional Indian Gurukul educational excellence merged with modern interactive STEM visualizations.
+                    </p>
+                </div>
+
+                <div class="space-y-2">
+                    <h4 class="font-cinzel text-amber-300 font-bold text-sm">Subject Portals</h4>
+                    <ul class="space-y-1">
+                        <li><a href="vidyanirman-physics.html" class="hover:text-cyan-300">Class 9 Physics Portal (Active)</a></li>
+                        <li><a href="vidyanirman-chemistry.html" class="hover:text-amber-300">Class 9 Chemistry Portal</a></li>
+                        <li><a href="vidyanirman-bio.html" class="hover:text-emerald-300">Class 9 Biology Portal</a></li>
+                        <li><a href="grand-quest.html" class="hover:text-amber-400">Grand Gurukul Quest</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-2">
+                    <h4 class="font-cinzel text-amber-300 font-bold text-sm">Founders & Leadership</h4>
+                    <p class="text-gray-300 font-semibold">Anmol Tiwari • Amrit Singh • Aryaman Mishra</p>
+                    <p class="text-gray-500 text-[11px]">Designed for CBSE/ICSE Class 9 Curriculum Excellence.</p>
+                </div>
+
+            </div>
+
+            <div class="max-w-7xl mx-auto mt-8 pt-6 border-t border-amber-900/30 text-center text-[11px] text-gray-500">
+                © 2026 Vidya Nirman Physics Portal. All rights reserved. "सा विद्या या विमुक्तये".
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        const canvas = document.getElementById('emberCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 100;
+                this.size = Math.random() * 2.2 + 0.5;
+                this.speedY = Math.random() * 1.2 + 0.3;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.7 + 0.3;
+                this.color = Math.random() > 0.4 ? '#FFD700' : '#00F2FE';
+            }
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                if (this.y < -10) this.reset();
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 45; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        function switchChapter(num) {
+            document.querySelectorAll('.chapter-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.chapter-btn').forEach(btn => {
+                btn.classList.remove('chapter-btn-active');
+                btn.classList.add('bg-[#220308]/60', 'text-gray-300');
+            });
+
+            const activeContent = document.getElementById(`chapter-${num}`);
+            if (activeContent) activeContent.classList.remove('hidden');
+
+            const activeBtn = document.getElementById(`tab-btn-${num}`);
+            if (activeBtn) {
+                activeBtn.classList.add('chapter-btn-active');
+                activeBtn.classList.remove('bg-[#220308]/60', 'text-gray-300');
+            }
+
+            // Re-render MathJax formula typesetting
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        }
+
+        function calculateKinematics() {
+            const u = parseFloat(document.getElementById('kin-u').value) || 0;
+            const a = parseFloat(document.getElementById('kin-a').value) || 0;
+            const t = parseFloat(document.getElementById('kin-t').value) || 0;
+
+            const v = u + (a * t);
+            const s = (u * t) + (0.5 * a * t * t);
+
+            document.getElementById('res-v').innerText = `${v.toFixed(2)} m/s`;
+            document.getElementById('res-s').innerText = `${s.toFixed(2)} m`;
+        }
+
+        function calculatePlanetWeight() {
+            const mass = parseFloat(document.getElementById('planet-mass').value) || 0;
+            const g = parseFloat(document.getElementById('planet-select').value) || 1.62;
+
+            const weight = mass * g;
+            const equivalentMassFeel = weight / 9.8;
+
+            document.getElementById('res-planet-w').innerText = `${weight.toFixed(2)} N`;
+            document.getElementById('res-planet-m').innerText = `${equivalentMassFeel.toFixed(2)} kg`;
+        }
+
+        function checkAnswer(btn, isCorrect, expId) {
+            const parent = btn.parentElement;
+            const buttons = parent.querySelectorAll('button');
+            buttons.forEach(b => b.disabled = true);
+
+            if (isCorrect) {
+                btn.classList.add('bg-emerald-950', 'border-emerald-500', 'text-emerald-300', 'font-bold');
+            } else {
+                btn.classList.add('bg-rose-950', 'border-rose-500', 'text-rose-300');
+            }
+
+            document.getElementById(expId).classList.remove('hidden');
+        }
+
+        const searchInput = document.getElementById('formulaSearchInput');
+        const searchResults = document.getElementById('searchQuickResults');
+
+        const formulaDatabase = [
+            { title: "First Equation of Motion", formula: "v = u + at", ch: 1 },
+            { title: "Second Equation of Motion", formula: "s = ut + 1/2 at²", ch: 1 },
+            { title: "Third Equation of Motion", formula: "v² = u² + 2as", ch: 1 },
+            { title: "Circular Motion Speed", formula: "v = 2πr / T", ch: 1 },
+            { title: "Newton's Second Law", formula: "F = ma", ch: 2 },
+            { title: "Linear Momentum", formula: "p = mv", ch: 2 },
+            { title: "Conservation of Momentum", formula: "m1u1 + m2u2 = m1v1 + m2v2", ch: 2 },
+            { title: "Universal Gravitation Law", formula: "F = G (m1 m2) / r²", ch: 3 },
+            { title: "Acceleration due to gravity", formula: "g = GM / R² = 9.8 m/s²", ch: 3 },
+            { title: "Weight on Moon", formula: "W_moon = 1/6 W_earth", ch: 3 },
+            { title: "Work Done", formula: "W = F · s", ch: 4 },
+            { title: "Kinetic Energy", formula: "E_k = 1/2 m v²", ch: 4 },
+            { title: "Potential Energy", formula: "E_p = m g h", ch: 4 },
+            { title: "Power", formula: "P = W / t", ch: 4 },
+            { title: "Wave Speed Equation", formula: "v = f · λ", ch: 5 },
+            { title: "Echo Minimum Distance", formula: "d = 17.2 meters", ch: 5 },
+            { title: "SONAR Distance", formula: "2d = v · t", ch: 5 }
+        ];
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            if (!query) {
+                searchResults.classList.add('hidden');
+                return;
+            }
+
+            const matches = formulaDatabase.filter(item => 
+                item.title.toLowerCase().includes(query) || 
+                item.formula.toLowerCase().includes(query)
+            );
+
+            if (matches.length > 0) {
+                searchResults.innerHTML = matches.map(item => `
+                    <div onclick="switchChapter(${item.ch}); searchResults.classList.add('hidden');" class="p-2 rounded hover:bg-[#3B0810] cursor-pointer text-xs border-b border-amber-900/30 flex justify-between items-center">
+                        <span class="text-amber-200 font-bold">${item.title}</span>
+                        <span class="font-mono text-cyan-400">${item.formula}</span>
+                    </div>
+                `).join('');
+                searchResults.classList.remove('hidden');
+            } else {
+                searchResults.innerHTML = `<p class="text-xs text-gray-400 p-2">No matching formulas found.</p>`;
+                searchResults.classList.remove('hidden');
+            }
+        });
+
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

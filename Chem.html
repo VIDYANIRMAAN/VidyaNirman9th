@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIDYA NIRMAN | Chemistry Class 9th Interactive Portal</title>
+    <link rel="icon" type="image/png" href="Gemini_Generated_Image_qyu3euqyu3euqyu3.png">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Noto+Serif+Devanagari:wght@500;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-maroon-dark: #0F0103;
+            --bg-maroon-deep: #220308;
+            --bg-maroon-mid: #3B0810;
+            --gold-primary: #D4AF37;
+            --gold-bright: #FFD700;
+            --gold-glow: rgba(212, 175, 55, 0.45);
+            --chem-amber: #F59E0B;
+            --parchment: #FFF9E6;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-maroon-dark);
+            color: var(--parchment);
+            overflow-x: hidden;
+        }
+
+        .font-devanagari { font-family: 'Noto Serif Devanagari', serif; }
+        .font-cinzel { font-family: 'Cinzel', serif; }
+
+        .jali-pattern {
+            background-image: radial-gradient(circle, rgba(212, 175, 55, 0.12) 1.2px, transparent 1.2px);
+            background-size: 26px 26px;
+        }
+
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #FFF0B3 0%, #FFD700 35%, #D4AF37 65%, #996515 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 7s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        .border-gold-glow {
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            box-shadow: 0 6px 24px -2px rgba(212, 175, 55, 0.15);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .border-gold-glow:hover {
+            border-color: rgba(255, 215, 0, 0.85);
+            box-shadow: 0 12px 35px -2px rgba(212, 175, 55, 0.45);
+            transform: translateY(-4px);
+        }
+
+        .bg-gold-gradient {
+            background: linear-gradient(135deg, #FFD700 0%, #D4AF37 50%, #B8860B 100%);
+        }
+
+        .bg-maroon-card {
+            background: linear-gradient(145deg, rgba(48, 5, 12, 0.92), rgba(20, 2, 5, 0.96));
+            backdrop-filter: blur(12px);
+        }
+
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .spin-slow { animation: spinSlow 55s linear infinite; }
+
+        @keyframes floatUpDown {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .animate-float { animation: floatUpDown 4.2s ease-in-out infinite; }
+
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0F0103; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FFD700; }
+    </style>
+</head>
+<body class="relative min-h-screen jali-pattern selection:bg-amber-500 selection:text-red-950">
+
+    <!-- Canvas Animation Background -->
+    <canvas id="emberCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-70"></canvas>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 bg-[#0F0103]/90 backdrop-blur-md border-b border-amber-500/30 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <a href="index.html" class="flex items-center gap-3.5 group">
+                <div class="relative flex items-center justify-center">
+                    <div class="w-12 h-12 rounded-full border-2 border-amber-400/80 flex items-center justify-center bg-[#220308] shadow-lg shadow-amber-500/20 group-hover:border-amber-300 transition-colors overflow-hidden">
+                        <img src="Gemini_Generated_Image_qyu3euqyu3euqyu3.png" alt="Vidya Nirman Logo" class="w-full h-full object-cover">
+                    </div>
+                    <svg class="absolute inset-0 w-12 h-12 text-amber-400/40 spin-slow pointer-events-none" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="48" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="6 4"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="font-cinzel text-2xl font-black tracking-wider text-gold-gradient leading-none">VIDYA NIRMAN</h1>
+                    <span class="font-devanagari text-xs text-amber-300/90 tracking-widest block mt-1 font-semibold">रसायन शास्त्र • CLASS 9TH</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center space-x-6 text-xs font-bold uppercase tracking-wider">
+                <a href="index.html" class="text-amber-100 hover:text-amber-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-house text-amber-400"></i> Home</a>
+                <a href="#chapters" class="text-amber-100 hover:text-amber-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-amber-400"></i> Syllabus</a>
+                <a href="#simulators" class="text-amber-100 hover:text-amber-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-flask text-amber-400"></i> Simulators</a>
+                <a href="#periodic" class="text-amber-100 hover:text-amber-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-table-cells text-amber-400"></i> Elements</a>
+                <a href="#quiz" class="text-amber-100 hover:text-amber-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-vial-circle-check text-amber-400"></i> Test Quiz</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <a href="chemistry-quest.html" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-amber-500/25 hover:scale-105 transition-all">
+                    <i class="fa-solid fa-fire-burner text-amber-950"></i>
+                    <span>Chem Quest</span>
+                </a>
+
+                <button id="mobileMenuBtn" class="lg:hidden text-amber-400 p-2.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-[#180206] border-b border-amber-500/30 px-6 py-4 space-y-3">
+            <a href="index.html" class="mobile-link block text-amber-100 hover:text-amber-400 py-1 font-semibold"><i class="fa-solid fa-house mr-2 text-amber-400"></i> Main Portal</a>
+            <a href="#chapters" class="mobile-link block text-amber-100 hover:text-amber-400 py-1 font-semibold"><i class="fa-solid fa-book-open mr-2 text-amber-400"></i> Detailed Chapters</a>
+            <a href="#simulators" class="mobile-link block text-amber-100 hover:text-amber-400 py-1 font-semibold"><i class="fa-solid fa-flask mr-2 text-amber-400"></i> Lab Simulators</a>
+            <a href="#periodic" class="mobile-link block text-amber-100 hover:text-amber-400 py-1 font-semibold"><i class="fa-solid fa-table-cells mr-2 text-amber-400"></i> Periodic Table</a>
+            <a href="chemistry-quest.html" class="mobile-link block text-amber-300 font-bold py-1"><i class="fa-solid fa-fire-burner mr-2 text-amber-400"></i> Chemistry-Quest Arena</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-12 pb-16 overflow-hidden z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+            <div class="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-amber-500/10 border border-amber-400/40 text-amber-200 text-xs sm:text-sm font-semibold mb-6 animate-float shadow-lg">
+                <i class="fa-solid fa-vial text-amber-400 text-base"></i>
+                <span class="font-devanagari tracking-wide font-bold">"परमाणुः तत्त्वस्य लघुतमः कणः भवति"</span>
+            </div>
+
+            <h1 class="font-cinzel text-4xl sm:text-6xl md:text-7xl font-black text-gold-gradient tracking-tight leading-none mb-4">
+                CLASS 9TH CHEMISTRY
+            </h1>
+
+            <p class="font-devanagari text-xl sm:text-2xl text-amber-200/90 max-w-3xl mx-auto mb-6 font-bold">
+                रसायन विज्ञान • Comprehensive Concept Portal &amp; Solvers
+            </p>
+
+            <p class="text-slate-300 text-xs sm:text-sm max-w-3xl mx-auto mb-10 leading-relaxed font-medium">
+                Deep-dive into Class 9th CBSE &amp; ICSE Chemistry: Matter, Purity of Substances, Atomic Structure, and Mole Concept calculations engineered by Founders <strong class="text-amber-300">Anmol Tiwari</strong> and <strong class="text-amber-300">Amrit Singh</strong>.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#chapters" class="px-8 py-3.5 rounded-xl bg-gold-gradient text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-amber-500/20 hover:scale-105 transition-all">
+                    Explore 4 Core Chapters <i class="fa-solid fa-arrow-down ml-2"></i>
+                </a>
+                <a href="chemistry-quest.html" class="px-8 py-3.5 rounded-xl bg-amber-950/80 text-amber-300 border border-amber-500/40 hover:border-amber-300 text-xs font-bold transition-all">
+                    Open Chem-Quest Arena <i class="fa-solid fa-gamepad ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Simulators & Calculators Section -->
+    <section id="simulators" class="py-12 relative z-10 border-t border-amber-500/20 bg-[#140206]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <span class="text-amber-400 text-xs font-black uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">Interactive Solvers</span>
+                <h2 class="font-cinzel text-3xl font-black text-gold-gradient mt-2">Chemistry Interactive Solvers</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mt-2"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Solver 1: Concentration Calculator -->
+                <div class="bg-maroon-card p-6 rounded-2xl border-gold-glow">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-cinzel text-lg font-bold text-amber-100">Solution Concentration Calculator</h3>
+                            <p class="text-slate-400 text-[11px]">Calculate Mass % = (Mass of Solute / Mass of Solution) &times; 100</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="block text-amber-200 mb-1 font-semibold">Mass of Solute (grams):</label>
+                            <input type="number" id="soluteMass" value="10" class="w-full bg-[#0F0103] text-amber-100 border border-amber-500/30 rounded-lg px-3 py-2 focus:outline-none focus:border-amber-400">
+                        </div>
+                        <div>
+                            <label class="block text-amber-200 mb-1 font-semibold">Mass of Solvent (water in grams):</label>
+                            <input type="number" id="solventMass" value="90" class="w-full bg-[#0F0103] text-amber-100 border border-amber-500/30 rounded-lg px-3 py-2 focus:outline-none focus:border-amber-400">
+                        </div>
+                        <button onclick="calculateConcentration()" class="w-full py-2.5 rounded-lg bg-gold-gradient text-slate-950 font-black text-xs uppercase tracking-wider hover:scale-[1.02] transition-all">
+                            Compute Mass Percentage
+                        </button>
+                        <div id="concentrationResult" class="p-3 bg-[#0F0103] rounded-lg border border-amber-500/20 text-amber-300 font-mono text-center">
+                            Concentration: <strong>10.00% (w/w)</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Solver 2: Chemical Formula Generator -->
+                <div class="bg-maroon-card p-6 rounded-2xl border-gold-glow">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-atom"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-cinzel text-lg font-bold text-amber-100">Criss-Cross Formula Generator</h3>
+                            <p class="text-slate-400 text-[11px]">Combine Cations and Anions using valencies</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="block text-amber-200 mb-1 font-semibold">Select Cation (Positive Ion):</label>
+                            <select id="cationSelect" class="w-full bg-[#0F0103] text-amber-100 border border-amber-500/30 rounded-lg px-3 py-2 focus:outline-none focus:border-amber-400">
+                                <option value="Na:1">Sodium (Na+)</option>
+                                <option value="Mg:2">Magnesium (Mg2+)</option>
+                                <option value="Al:3">Aluminium (Al3+)</option>
+                                <option value="Ca:2">Calcium (Ca2+)</option>
+                                <option value="Fe:3">Iron III (Fe3+)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-amber-200 mb-1 font-semibold">Select Anion (Negative Ion):</label>
+                            <select id="anionSelect" class="w-full bg-[#0F0103] text-amber-100 border border-amber-500/30 rounded-lg px-3 py-2 focus:outline-none focus:border-amber-400">
+                                <option value="Cl:1">Chloride (Cl-)</option>
+                                <option value="O:2">Oxide (O2-)</option>
+                                <option value="SO4:2">Sulphate (SO4 2-)</option>
+                                <option value="NO3:1">Nitrate (NO3-)</option>
+                                <option value="CO3:2">Carbonate (CO3 2-)</option>
+                            </select>
+                        </div>
+                        <button onclick="generateFormula()" class="w-full py-2.5 rounded-lg bg-gold-gradient text-slate-950 font-black text-xs uppercase tracking-wider hover:scale-[1.02] transition-all">
+                            Generate Formula
+                        </button>
+                        <div id="formulaResult" class="p-3 bg-[#0F0103] rounded-lg border border-amber-500/20 text-amber-300 font-mono text-center">
+                            Resulting Formula: <strong class="text-yellow-300">NaCl</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chapterwise Vast Content Section -->
+    <section id="chapters" class="py-16 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+
+            <div class="text-center">
+                <span class="text-amber-400 text-xs font-black uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">Exhaustive Curriculum</span>
+                <h2 class="font-cinzel text-3xl sm:text-4xl font-black text-gold-gradient mt-2">Class 9th Chemistry Modules</h2>
+                <div class="w-32 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mt-3"></div>
+            </div>
+
+            <!-- CHAPTER 1 -->
+            <div class="bg-maroon-card p-8 rounded-2xl border-gold-glow space-y-6">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-amber-500/20 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">CHAPTER 01</span>
+                        <h3 class="font-cinzel text-2xl font-black text-amber-100">Matter in Our Surroundings</h3>
+                    </div>
+                    <span class="bg-amber-500/20 text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">NCERT Chapter 1</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 text-xs text-slate-300 leading-relaxed">
+                    <div class="space-y-4">
+                        <h4 class="font-cinzel text-amber-300 text-sm font-bold">1. Physical Nature of Matter &amp; States</h4>
+                        <p>Everything in the universe that has mass and occupies space is called <strong>Matter</strong>. Matter is made up of tiny particles with intermolecular space and attractive forces between them.</p>
+                        <ul class="list-disc pl-5 space-y-1 text-slate-300">
+                            <li><strong>Solid:</strong> Fixed shape and volume, high density, negligible compressibility.</li>
+                            <li><strong>Liquid:</strong> Fixed volume, no fixed shape, fluid, moderate compressibility.</li>
+                            <li><strong>Gas:</strong> Neither fixed shape nor volume, high kinetic energy, highly compressible.</li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h4 class="font-cinzel text-amber-300 text-sm font-bold">2. Latent Heat &amp; Evaporation</h4>
+                        <p><strong>Latent Heat:</strong> The hidden heat energy required to change the state of a substance without changing its temperature.</p>
+                        <ul class="list-disc pl-5 space-y-1 text-slate-300">
+                            <li><strong>Latent Heat of Fusion:</strong> Heat needed to convert 1 kg of solid into liquid at atmospheric pressure at its melting point.</li>
+                            <li><strong>Latent Heat of Vaporisation:</strong> Heat required to convert 1 kg of liquid into gas at its boiling point.</li>
+                            <li><strong>Evaporation:</strong> Surface phenomenon causing cooling. Rate increases with surface area, temperature, and wind speed, but decreases with humidity.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-[#0F0103] p-4 rounded-xl border border-amber-500/20 text-xs space-y-2">
+                    <strong class="text-amber-300 font-cinzel">Solved Practice Numerical: Temperature Conversion</strong>
+                    <p class="text-slate-300"><strong>Problem:</strong> Convert 300 K to Celsius scale and 25&deg;C to Kelvin scale.</p>
+                    <p class="font-mono text-amber-200">Solution: Temperature in &deg;C = K - 273 = 300 - 273 = 27&deg;C.</p>
+                    <p class="font-mono text-amber-200">Solution: Temperature in K = &deg;C + 273 = 25 + 273 = 298 K.</p>
+                </div>
+            </div>
+
+            <!-- CHAPTER 2 -->
+            <div class="bg-maroon-card p-8 rounded-2xl border-gold-glow space-y-6">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-amber-500/20 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">CHAPTER 02</span>
+                        <h3 class="font-cinzel text-2xl font-black text-amber-100">Is Matter Around Us Pure?</h3>
+                    </div>
+                    <span class="bg-amber-500/20 text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">NCERT Chapter 2</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 text-xs text-slate-300 leading-relaxed">
+                    <div class="space-y-4">
+                        <h4 class="font-cinzel text-amber-300 text-sm font-bold">1. Pure Substances vs Mixtures</h4>
+                        <p><strong>Pure Substance:</strong> Consists of a single type of particle (e.g., pure Gold, Water).</p>
+                        <p><strong>Mixture:</strong> Contains two or more pure substances mixed physically.</p>
+                        <ul class="list-disc pl-5 space-y-1 text-slate-300">
+                            <li><strong>Homogeneous Mixture:</strong> Uniform composition throughout (e.g., Salt in water).</li>
+                            <li><strong>Heterogeneous Mixture:</strong> Non-uniform composition (e.g., Sand in water, Oil &amp; Water).</li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h4 class="font-cinzel text-amber-300 text-sm font-bold">2. True Solutions, Colloids &amp; Suspensions</h4>
+                        <ul class="list-disc pl-5 space-y-1 text-slate-300">
+                            <li><strong>Solution:</strong> Homogeneous, particle size &lt; 1 nm, does not scatter light.</li>
+                            <li><strong>Colloid:</strong> Heterogeneous appearance but stable, particle size 1-100 nm, exhibits <strong>Tyndall Effect</strong>.</li>
+                            <li><strong>Suspension:</strong> Heterogeneous, particle size &gt; 100 nm, unstable, particles settle down.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-[#0F0103] p-4 rounded-xl border border-amber-500/20 text-xs space-y-2">
+                    <strong class="text-amber-300 font-cinzel">Solved Concentration Numerical:</strong>
+                    <p class="text-slate-300"><strong>Problem:</strong> A solution contains 40 g of common salt in 320 g of water. Calculate concentration in mass percentage.</p>
+                    <p class="font-mono text-amber-200">Mass of Solution = Solute (40g) + Solvent (320g) = 360 g.</p>
+                    <p class="font-mono text-amber-200">Mass % = (40 / 360) &times; 100 = 11.11% (w/w).</p>
+                </div>
+            </div>
+
+            <!-- CHAPTER 3 -->
+            <div class="bg-maroon-card p-8 rounded-2xl border-gold-glow space-y-6">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-amber-500/20 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">CHAPTER 03</span>
+                        <h3 class="font-cinzel text-2xl font-black text-amber-100">Atoms &amp; Molecules</h3>
+                    </div>
+                    <span class="bg-amber-500/20 text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">NCERT Chapter 3</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 text-xs text-slate-300 leading-relaxed">
+                    <div class="space-y-4">
+                        <h4 class="font-cinzel text-amber-300 text-sm font-bold">1. Laws of Chemical Combination</h4>
+                        <p><strong>Law of Conservation of Mass:</strong> Mass can neither be created nor destroyed in a chemical reaction. (Lavoisier)</p>
+                        <p><strong>Law of Constant Proportions:</strong> In a chemical substance, elements are always present in definite proportions by mass. (Proust)</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h4 class="font-cinzel text-amber-300 text-sm font-bold">2. Mole Concept &amp; Formulae</h4>
+                        <p><strong>1 Mole = 6.022 &times; 10<sup>23</sup> particles</strong> (Avogadro Constant $N_A$).</p>
+                        <p class="font-mono text-amber-200">Number of moles (n) = Given Mass (m) / Molar Mass (M)</p>
+                        <p class="font-mono text-amber-200">Number of moles (n) = Given Particles (N) / 6.022 &times; 10<sup>23</sup></p>
+                    </div>
+                </div>
+
+                <div class="bg-[#0F0103] p-4 rounded-xl border border-amber-500/20 text-xs space-y-2">
+                    <strong class="text-amber-300 font-cinzel">Solved Mole Concept Numerical:</strong>
+                    <p class="text-slate-300"><strong>Problem:</strong> Calculate the number of moles in 52 g of Helium (He, atomic mass = 4 u).</p>
+                    <p class="font-mono text-amber-200">n = Given Mass / Molar Mass = 52 / 4 = 13 moles of He.</p>
+                </div>
+            </div>
+
+            <!-- CHAPTER 4 -->
+            <div class="bg-maroon-card p-8 rounded-2xl border-gold-glow space-y-6">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-amber-500/20 pb-4">
+                    <div>
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-widest">CHAPTER 04</span>
+                        <h3 class="font-cinzel text-2xl font-black text-amber-100">Structure of the Atom</h3>
+                    </div>
+                    <span class="bg-amber-500/20 text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/30">NCERT Chapter 4</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 text-xs text-slate-300 leading-relaxed">
+                    <div class="space-y-4">
+                        <h4 class="font-cinzel text-amber-300 text-sm font-bold">1. Subatomic Particles &amp; Models</h4>
+                        <ul class="list-disc pl-5 space-y-1 text-slate-300">
+                            <li><strong>Electrons (e<sup>-</sup>):</strong> Discovered by J.J. Thomson (Cathode Rays).</li>
+                            <li><strong>Protons (p<sup>+</sup>):</strong> Discovered by E. Goldstein (Anode Rays).</li>
+                            <li><strong>Neutrons (n<sup>0</sup>):</strong> Discovered by J. Chadwick (Neutral particle in nucleus).</li>
+                            <li><strong>Rutherford Model:</strong> Alpha particle scattering experiment proved nucleus existence.</li>
+                            <li><strong>Bohr's Model:</strong> Electrons revolve in discrete energy orbits (K, L, M, N) without radiating energy.</li>
+                        </ul>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h4 class="font-cinzel text-amber-300 text-sm font-bold">2. Electronic Distribution &amp; Isotopes</h4>
+                        <p><strong>Bohr-Bury Scheme:</strong> Maximum electrons in nth shell = $2n^2$. K shell = 2, L shell = 8, M shell = 18.</p>
+                        <p><strong>Valency:</strong> Combining capacity of an atom determined by outermost shell electrons.</p>
+                        <p><strong>Isotopes:</strong> Same Atomic Number (Z), Different Mass Number (A) (e.g., Protium, Deuterium, Tritium).</p>
+                        <p><strong>Isobars:</strong> Same Mass Number (A), Different Atomic Number (Z) (e.g., Calcium and Argon both have A=40).</p>
+                    </div>
+                </div>
+
+                <div class="bg-[#0F0103] p-4 rounded-xl border border-amber-500/20 text-xs space-y-2">
+                    <strong class="text-amber-300 font-cinzel">Solved Average Atomic Mass Numerical:</strong>
+                    <p class="text-slate-300"><strong>Problem:</strong> Chlorine occurs in nature as 75% Cl-35 and 25% Cl-37. Find average atomic mass.</p>
+                    <p class="font-mono text-amber-200">Average Mass = (35 &times; 75/100) + (37 &times; 25/100) = 26.25 + 9.25 = 35.5 u.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Interactive Periodic Table Inspector (Elements 1-20) -->
+    <section id="periodic" class="py-12 relative z-10 bg-[#120205] border-t border-amber-500/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <span class="text-amber-400 text-xs font-black uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">Elements Directory</span>
+                <h2 class="font-cinzel text-3xl font-black text-gold-gradient mt-2">Class 9th Elements Directory (1 to 20)</h2>
+                <p class="text-slate-400 text-xs mt-2">Click any element box to view atomic structure and electronic configuration.</p>
+            </div>
+
+            <div id="elementGrid" class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-10 gap-2 mb-6">
+                <!-- Javascript will populate 20 element cards -->
+            </div>
+
+            <div id="elementDetail" class="bg-maroon-card p-6 rounded-xl border-gold-glow text-xs text-center">
+                <p class="text-slate-400">Select an element above to inspect details.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Knowledge Quiz -->
+    <section id="quiz" class="py-16 relative z-10 border-t border-amber-500/20">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <span class="text-amber-400 text-xs font-black uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">Self Assessment</span>
+                <h2 class="font-cinzel text-3xl font-black text-gold-gradient mt-2">Chemistry Concept Check</h2>
+            </div>
+
+            <div class="bg-maroon-card p-8 rounded-2xl border-gold-glow space-y-6">
+                <div>
+                    <span class="text-amber-400 font-bold text-xs">Question 1 of 3</span>
+                    <h3 class="text-amber-100 font-bold text-sm mt-1">Which subatomic particle was discovered by James Chadwick in 1932?</h3>
+                    <div class="space-y-2 mt-3 text-xs">
+                        <button onclick="checkQuiz(this, false)" class="w-full text-left p-3 rounded-lg bg-[#0F0103] border border-amber-500/30 text-slate-300 hover:border-amber-400">A) Electron</button>
+                        <button onclick="checkQuiz(this, false)" class="w-full text-left p-3 rounded-lg bg-[#0F0103] border border-amber-500/30 text-slate-300 hover:border-amber-400">B) Proton</button>
+                        <button onclick="checkQuiz(this, true)" class="w-full text-left p-3 rounded-lg bg-[#0F0103] border border-amber-500/30 text-slate-300 hover:border-amber-400">C) Neutron</button>
+                        <button onclick="checkQuiz(this, false)" class="w-full text-left p-3 rounded-lg bg-[#0F0103] border border-amber-500/30 text-slate-300 hover:border-amber-400">D) Positron</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Section (Exclusively Anmol Tiwari & Amrit Singh) -->
+    <section class="py-16 relative z-10 bg-[#0F0103] border-t border-amber-500/20">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <span class="text-amber-400 text-xs font-black uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/30">Academic Guidance</span>
+                <h2 class="font-cinzel text-3xl font-black text-gold-gradient mt-2">Vidya Nirman Leadership</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-maroon-card p-6 rounded-2xl border-gold-glow flex items-center gap-4">
+                    <img src="anmol image.png" alt="Anmol Tiwari" class="w-20 h-20 rounded-full object-cover border-2 border-amber-400">
+                    <div>
+                        <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-bold">FOUNDER</span>
+                        <h3 class="font-cinzel text-lg font-bold text-amber-100 mt-1">ANMOL TIWARI</h3>
+                        <p class="text-xs text-amber-300/80">Chief Visionary &amp; Curriculum Architect</p>
+                    </div>
+                </div>
+
+                <div class="bg-maroon-card p-6 rounded-2xl border-gold-glow flex items-center gap-4">
+                    <img src="amrit image.jpg" alt="Amrit Singh" class="w-20 h-20 rounded-full object-cover border-2 border-amber-400">
+                    <div>
+                        <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded font-bold">CO-FOUNDER</span>
+                        <h3 class="font-cinzel text-lg font-bold text-amber-100 mt-1">AMRIT SINGH</h3>
+                        <p class="text-xs text-amber-300/80">Academic Strategist &amp; Tech Innovator</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-amber-500/30 bg-[#0A0002] py-8 text-xs text-slate-400 text-center">
+        <div class="max-w-7xl mx-auto px-4 space-y-3">
+            <div class="font-cinzel text-lg font-black text-gold-gradient">VIDYA NIRMAN CHEMISTRY PORTAL</div>
+            <p class="font-devanagari text-amber-300">सा विद्या या विमुक्तये</p>
+            <p>&copy; 2026 Vidya Nirman Interactive Ecosystem. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        /* Canvas Animation */
+        const canvas = document.getElementById('emberCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height + canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedY = Math.random() * 0.7 + 0.2;
+                this.opacity = Math.random() * 0.7 + 0.3;
+            }
+            update() {
+                this.y -= this.speedY;
+                if (this.y < -10) this.reset();
+            }
+            draw() {
+                ctx.fillStyle = `rgba(245, 158, 11, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 60; i++) particles.push(new Particle());
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        /* Mobile Menu */
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        /* Concentration Calculator */
+        function calculateConcentration() {
+            const solute = parseFloat(document.getElementById('soluteMass').value) || 0;
+            const solvent = parseFloat(document.getElementById('solventMass').value) || 0;
+            const total = solute + solvent;
+            if (total <= 0) return;
+            const percent = (solute / total) * 100;
+            document.getElementById('concentrationResult').innerHTML = `Concentration: <strong>${percent.toFixed(2)}% (w/w)</strong> (Solute: ${solute}g, Solution: ${total}g)`;
+        }
+
+        /* Formula Generator */
+        function generateFormula() {
+            const cationVal = document.getElementById('cationSelect').value.split(':');
+            const anionVal = document.getElementById('anionSelect').value.split(':');
+
+            const catSymbol = cationVal[0];
+            const catCharge = parseInt(cationVal[1]);
+            const anSymbol = anionVal[0];
+            const anCharge = parseInt(anionVal[1]);
+
+            function gcd(a, b) { return b == 0 ? a : gcd(b, a % b); }
+            const common = gcd(catCharge, anCharge);
+
+            const catSub = anCharge / common;
+            const anSub = catCharge / common;
+
+            let result = catSymbol + (catSub > 1 ? catSub : '');
+            let formAnion = (anSymbol.length > 2 && anSub > 1) ? `(${anSymbol})` : anSymbol;
+            result += formAnion + (anSub > 1 ? anSub : '');
+
+            document.getElementById('formulaResult').innerHTML = `Resulting Formula: <strong class="text-yellow-300">${result}</strong>`;
+        }
+
+        /* Element Inspector (1 to 20) */
+        const elements = [
+            {z:1, sym:'H', name:'Hydrogen', mass:'1.008', cfg:'1'},
+            {z:2, sym:'He', name:'Helium', mass:'4.0026', cfg:'2'},
+            {z:3, sym:'Li', name:'Lithium', mass:'6.94', cfg:'2, 1'},
+            {z:4, sym:'Be', name:'Beryllium', mass:'9.0122', cfg:'2, 2'},
+            {z:5, sym:'B', name:'Boron', mass:'10.81', cfg:'2, 3'},
+            {z:6, sym:'C', name:'Carbon', mass:'12.011', cfg:'2, 4'},
+            {z:7, sym:'N', name:'Nitrogen', mass:'14.007', cfg:'2, 5'},
+            {z:8, sym:'O', name:'Oxygen', mass:'15.999', cfg:'2, 6'},
+            {z:9, sym:'F', name:'Fluorine', mass:'18.998', cfg:'2, 7'},
+            {z:10, sym:'Ne', name:'Neon', mass:'20.180', cfg:'2, 8'},
+            {z:11, sym:'Na', name:'Sodium', mass:'22.990', cfg:'2, 8, 1'},
+            {z:12, sym:'Mg', name:'Magnesium', mass:'24.305', cfg:'2, 8, 2'},
+            {z:13, sym:'Al', name:'Aluminium', mass:'26.982', cfg:'2, 8, 3'},
+            {z:14, sym:'Si', name:'Silicon', mass:'28.085', cfg:'2, 8, 4'},
+            {z:15, sym:'P', name:'Phosphorus', mass:'30.974', cfg:'2, 8, 5'},
+            {z:16, sym:'S', name:'Sulfur', mass:'32.06', cfg:'2, 8, 6'},
+            {z:17, sym:'Cl', name:'Chlorine', mass:'35.45', cfg:'2, 8, 7'},
+            {z:18, sym:'Ar', name:'Argon', mass:'39.948', cfg:'2, 8, 8'},
+            {z:19, sym:'K', name:'Potassium', mass:'39.098', cfg:'2, 8, 8, 1'},
+            {z:20, sym:'Ca', name:'Calcium', mass:'40.078', cfg:'2, 8, 8, 2'}
+        ];
+
+        const grid = document.getElementById('elementGrid');
+        elements.forEach(el => {
+            const btn = document.createElement('button');
+            btn.className = "p-2 bg-maroon-card border border-amber-500/30 rounded-lg hover:border-amber-400 transition-all text-center";
+            btn.innerHTML = `<span class="text-[9px] text-amber-400 block">${el.z}</span><strong class="text-sm font-bold text-amber-100">${el.sym}</strong>`;
+            btn.onclick = () => showElement(el);
+            grid.appendChild(btn);
+        });
+
+        function showElement(el) {
+            document.getElementById('elementDetail').innerHTML = `
+                <div class="space-y-1">
+                    <h3 class="font-cinzel text-base font-bold text-amber-300">${el.name} (${el.sym})</h3>
+                    <p class="text-slate-300">Atomic Number (Z): <strong>${el.z}</strong> | Atomic Mass: <strong>${el.mass} u</strong></p>
+                    <p class="font-mono text-yellow-300">Electronic Configuration (K,L,M,N): <strong>${el.cfg}</strong></p>
+                </div>
+            `;
+        }
+
+        /* Quiz Check */
+        function checkQuiz(btn, isCorrect) {
+            if (isCorrect) {
+                btn.className = "w-full text-left p-3 rounded-lg bg-emerald-900/60 border border-emerald-500 text-emerald-200 font-bold";
+                btn.innerText += " - Correct! (James Chadwick discovered Neutrons in 1932)";
+            } else {
+                btn.className = "w-full text-left p-3 rounded-lg bg-rose-900/60 border border-rose-500 text-rose-200 font-bold";
+                btn.innerText += " - Incorrect. Try again!";
+            }
+        }
+    </script>
+</body>
+</html>
