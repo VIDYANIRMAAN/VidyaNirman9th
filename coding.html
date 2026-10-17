@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#220308">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn HTML, CSS, JavaScript and Python with Vidya Nirman Coding Academy: live code lab, projects, quizzes and AI tutor.">
+  <meta name="theme-color" content="#0F0103">
+  <title>VN Coding Academy | Vidya Nirman</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0F0103;--deep:#220308;--mid:#3B0810;--gold:#D4AF37;--bright:#FFD700;--cream:#FFF9E6}
+    *{box-sizing:border-box}body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--cream);overflow-x:hidden}
+    .font-cinzel{font-family:'Cinzel',serif}.jali{background-image:radial-gradient(circle,rgba(212,175,55,.12) 1.2px,transparent 1.2px);background-size:26px 26px}
+    .gold-text{background:linear-gradient(135deg,#FFF0B3,#FFD700 35%,#D4AF37 65%,#996515);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .gold-card{background:linear-gradient(145deg,rgba(48,5,12,.96),rgba(20,2,5,.98));border:1px solid rgba(212,175,55,.35);box-shadow:0 6px 24px -2px rgba(212,175,55,.12)}
+    .gold-card:hover{border-color:rgba(255,215,0,.8);box-shadow:0 12px 35px -2px rgba(212,175,55,.22)}
+    .codebox{background:#090103;border:1px solid #6f4e19;border-radius:14px;overflow:hidden}
+    .codebox pre{margin:0;padding:18px;overflow-x:auto;color:#ffe8a1;font:13px/1.75 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre}
+    .lesson-link{display:block;padding:10px 12px;border:1px solid rgba(212,175,55,.18);border-radius:10px;color:#fce7a5;font-size:13px}
+    .lesson-link:hover,.lesson-link.active{background:#3b0810;border-color:#d4af37}
+    .pill{border:1px solid #8e6d24;background:#2b0a10;color:#ffe8a1;border-radius:999px;padding:7px 12px;font-size:12px}
+    .answer{display:none;margin-top:10px;padding:12px;border-radius:10px;background:#102c1b;border:1px solid #2e7d4f;color:#c8f7d6}
+    .answer.show{display:block}
+    .lesson-done.done{background:#12301d;border-color:#4ade80;color:#bbf7d0}
+    #labCode{resize:vertical;tab-size:2}
+    .lesson-link{transition:background .2s,border-color .2s}
+    iframe{display:block}
+    button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #FFD700;outline-offset:3px}
+    button:disabled{opacity:.5;cursor:not-allowed}
+    .preview{background:#fff;color:#222;border-radius:12px;padding:18px;min-height:90px}
+    .nav-mobile{display:none}
+    @media(max-width:800px){.layout{grid-template-columns:1fr!important}.sidebar{position:static!important}.nav-desktop{display:none}.nav-mobile{display:flex}.hero-title{font-size:2.3rem}}
+    @media print{body.printing-certificate *{visibility:hidden!important}body.printing-certificate #certificatePaper,body.printing-certificate #certificatePaper *{visibility:visible!important}body.printing-certificate #certificatePaper{display:block!important;position:absolute;inset:0 auto auto 0;width:100%;margin:0!important;min-height:90vh;box-shadow:none!important;break-inside:avoid}body.printing-certificate{background:#fff!important}.no-print{display:none!important}}
+  </style>
+</head>
+<body class="jali min-h-screen">
+  <header class="sticky top-0 z-50 border-b border-amber-500/30 bg-[#0F0103]/95 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-full border-2 border-amber-400 overflow-hidden bg-[#220308]"><img src="logo.png" alt="Vidya Nirman logo" class="w-full h-full object-cover"></div>
+        <div><div class="font-cinzel font-black tracking-wider text-lg gold-text">VIDYA NIRMAN</div><div class="text-[10px] text-amber-300 tracking-widest">CODING ACADEMY</div></div>
+      </a>
+      <nav class="nav-desktop flex items-center gap-5 text-xs font-bold uppercase tracking-wide">
+        <a class="hover:text-amber-300" href="index.html">Home</a><a class="hover:text-amber-300" href="#learn">Lessons</a><a class="hover:text-amber-300" href="#playground">Live Lab</a><a class="hover:text-amber-300" href="#projects">Projects</a><a class="hover:text-amber-300" href="#practice">Practice</a><a class="hover:text-amber-300" href="#ai-tutor">AI Tutor</a><a class="hover:text-amber-300" href="#certificate">Certificate</a>
+      </nav>
+      <div class="flex items-center gap-2"><button id="mobileMenuBtn" class="pill nav-mobile" type="button" aria-expanded="false" aria-controls="mobileMenu"><i class="fa-solid fa-bars"></i><span class="sr-only">Open menu</span></button><a href="index.html" class="pill"><i class="fa-solid fa-arrow-left mr-1"></i> Homepage</a></div>
+    </div>
+    <nav id="mobileMenu" class="hidden border-t border-amber-500/20 px-4 py-3 md:hidden" aria-label="Mobile navigation"><div class="flex flex-wrap gap-2 text-xs"><a class="pill" href="#learn">Lessons</a><a class="pill" href="#playground">Live Lab</a><a class="pill" href="#courses">Courses</a><a class="pill" href="#practice">Quiz</a><a class="pill" href="#ai-tutor">AI Tutor</a><a class="pill" href="#certificate">Certificate</a></div></nav>
+  </header>
+
+  <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <section class="text-center max-w-4xl mx-auto py-8 sm:py-14">
+      <span class="inline-flex items-center gap-2 rounded-full border border-violet-400/40 bg-violet-500/10 px-4 py-2 text-xs text-violet-200 font-bold uppercase tracking-wider"><i class="fa-solid fa-code"></i> Beginner friendly • Free lessons</span>
+      <h1 class="hero-title font-cinzel text-4xl sm:text-6xl font-black gold-text mt-6">VN CODING ACADEMY</h1>
+      <p class="text-amber-200 text-lg sm:text-xl mt-4 font-semibold">Coding zero se seekho — simple Hinglish mein.</p>
+      <p class="text-slate-300 text-sm leading-7 max-w-2xl mx-auto mt-4">Website ka structure HTML banata hai, design CSS deta hai, aur interactivity JavaScript se aati hai. Har lesson mein explanation, code example, output aur practice milegi.</p>
+      <div class="flex flex-wrap justify-center gap-3 mt-7"><a href="#learn" class="rounded-xl bg-gradient-to-r from-amber-400 to-yellow-600 px-5 py-3 text-sm font-black text-[#220308]"><i class="fa-solid fa-play mr-2"></i>Start Learning</a><a href="#playground" class="rounded-xl border border-amber-500/40 px-5 py-3 text-sm font-bold text-amber-200 hover:bg-amber-500/10"><i class="fa-solid fa-flask mr-2"></i>Try Live Code Lab</a><a href="#practice" class="rounded-xl border border-amber-500/40 px-5 py-3 text-sm font-bold text-amber-200 hover:bg-amber-500/10">Practice Questions</a></div>
+    </section>
+
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+      <div class="gold-card rounded-2xl p-5"><div class="text-orange-300 text-2xl"><i class="fa-brands fa-html5"></i></div><h2 class="font-cinzel font-bold text-lg mt-3">HTML</h2><p class="text-xs text-slate-300 mt-2 leading-6">Webpage ka skeleton: headings, paragraphs, links, images aur forms.</p><span class="text-[11px] text-amber-300 block mt-3">LESSONS 01–03</span></div>
+      <div class="gold-card rounded-2xl p-5"><div class="text-sky-300 text-2xl"><i class="fa-brands fa-css3-alt"></i></div><h2 class="font-cinzel font-bold text-lg mt-3">CSS</h2><p class="text-xs text-slate-300 mt-2 leading-6">Colours, fonts, spacing, cards aur responsive page design.</p><span class="text-[11px] text-amber-300 block mt-3">LESSONS 04–05</span></div>
+      <div class="gold-card rounded-2xl p-5"><div class="text-yellow-300 text-2xl"><i class="fa-brands fa-js"></i></div><h2 class="font-cinzel font-bold text-lg mt-3">JavaScript</h2><p class="text-xs text-slate-300 mt-2 leading-6">Buttons, variables, functions aur webpage ko interactive banana.</p><span class="text-[11px] text-amber-300 block mt-3">LESSONS 06–07</span></div>
+    </section>
+
+    <div class="gold-card rounded-2xl p-4 mb-6 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between"><div><p class="text-sm font-bold text-amber-100">Your learning dashboard</p><p class="text-xs text-slate-400 mt-1">Lessons ko mark karo aur apni progress track karo.</p></div><div class="flex-1 max-w-md"><div class="flex justify-between text-xs text-amber-200 mb-2"><span id="lessonProgressLabel">Lessons completed</span><span id="lessonProgressCount">0 / 10</span></div><div class="h-2 rounded-full bg-black/50 overflow-hidden"><div id="lessonProgressBar" class="h-full bg-gradient-to-r from-amber-400 to-yellow-600" style="width:0%"></div></div></div></div>
+    <section class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8" aria-label="Academy features">
+      <a href="#playground" class="gold-card rounded-xl p-4 hover:-translate-y-0.5 transition"><div class="text-amber-300 text-xl"><i class="fa-solid fa-terminal"></i></div><p class="font-bold text-sm mt-2">Live Code Lab</p><p class="text-[11px] text-slate-400 mt-1">Write · Run · Preview</p></a>
+      <a href="#courses" class="gold-card rounded-xl p-4 hover:-translate-y-0.5 transition"><div class="text-sky-300 text-xl"><i class="fa-solid fa-graduation-cap"></i></div><p class="font-bold text-sm mt-2">4 Learning Paths</p><p class="text-[11px] text-slate-400 mt-1">HTML, CSS, JS, Python</p></a>
+      <a href="#practice" class="gold-card rounded-xl p-4 hover:-translate-y-0.5 transition"><div class="text-emerald-300 text-xl"><i class="fa-solid fa-trophy"></i></div><p class="font-bold text-sm mt-2">50-question quiz</p><p class="text-[11px] text-slate-400 mt-1">Practice at your pace</p></a>
+      <a href="#ai-tutor" class="gold-card rounded-xl p-4 hover:-translate-y-0.5 transition"><div class="text-violet-300 text-xl"><i class="fa-solid fa-robot"></i></div><p class="font-bold text-sm mt-2">VN AI Tutor</p><p class="text-[11px] text-slate-400 mt-1">Ask coding questions</p></a>
+    </section>
+
+    <div id="learn" class="layout grid grid-cols-[260px_minmax(0,1fr)] gap-6 items-start">
+      <aside class="sidebar sticky top-24 gold-card rounded-2xl p-4">
+        <h2 class="font-cinzel font-bold text-amber-200 mb-3"><i class="fa-solid fa-list-ol mr-2"></i>Lesson Map</h2>
+        <a class="lesson-link active" href="#lesson1">01 · Your first webpage</a><a class="lesson-link mt-2" href="#lesson2">02 · Headings & paragraphs</a><a class="lesson-link mt-2" href="#lesson3">03 · Links & images</a><a class="lesson-link mt-2" href="#lesson4">04 · CSS styling</a><a class="lesson-link mt-2" href="#lesson5">05 · CSS cards</a><a class="lesson-link mt-2" href="#lesson6">06 · JavaScript variables</a><a class="lesson-link mt-2" href="#lesson7">07 · Button interaction</a><a class="lesson-link mt-2" href="#lesson8">08 · Responsive design</a><a class="lesson-link mt-2" href="#lesson9">09 · Forms & inputs</a><a class="lesson-link mt-2" href="#lesson10">10 · Functions & conditions</a><a class="lesson-link mt-2" href="#playground">🧪 Live Code Lab</a><a class="lesson-link mt-2" href="#projects">🚀 Mini projects</a><a class="lesson-link mt-2" href="#courses">📚 More courses</a><a class="lesson-link mt-2" href="#ai-tutor">🤖 AI tutor</a><a class="lesson-link mt-2" href="#certificate">🏅 Certificate</a><a class="lesson-link mt-2" href="#cheatsheet">⚡ Quick cheat sheet</a>
+        <div class="mt-5 rounded-xl bg-[#160207] border border-amber-500/20 p-3"><p class="text-xs text-amber-200 font-bold">Learning tip</p><p class="text-[11px] text-slate-300 leading-5 mt-1">Code ko sirf copy mat karo. Har line change karke dekho ki output kaise badalta hai.</p></div>
+      </aside>
+
+      <div class="space-y-6">
+        <section id="lesson1" class="gold-card rounded-2xl p-5 sm:p-7">
+          <span class="text-[10px] font-black tracking-widest text-orange-300">LESSON 01 · HTML BASICS</span><h2 class="font-cinzel text-2xl font-bold text-amber-100 mt-2">Your First Webpage</h2><button type="button" class="lesson-done pill mt-3" data-lesson="1"><i class="fa-regular fa-circle-check mr-1"></i>Mark lesson complete</button>
+          <p class="text-sm text-slate-300 leading-7 mt-3">HTML ka full form <b class="text-amber-200">HyperText Markup Language</b> hai. Isse browser ko batate hain ki page par heading, paragraph, image ya link kya hai. HTML programming language nahi, ek markup language hai.</p>
+          <div class="codebox mt-4"><div class="px-4 py-2 border-b border-amber-500/20 text-[11px] text-amber-300 flex justify-between"><span>index.html</span><button class="copy-code pill" type="button">Copy code</button></div><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;My First Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello, World!&lt;/h1&gt;
+  &lt;p&gt;Meri pehli website.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre></div>
+          <p class="text-xs text-slate-400 mt-3">Samjho: <code class="text-amber-200">&lt;head&gt;</code> mein page ki information, aur <code class="text-amber-200">&lt;body&gt;</code> mein screen par dikhne wala content hota hai.</p>
+          <div class="preview mt-4"><h3 class="text-2xl font-bold">Hello, World!</h3><p class="mt-2">Meri pehli website.</p></div>
+        </section>
+
+        <section id="lesson2" class="gold-card rounded-2xl p-5 sm:p-7">
+          <span class="text-[10px] font-black tracking-widest text-orange-300">LESSON 02 · HTML CONTENT</span><h2 class="font-cinzel text-2xl font-bold text-amber-100 mt-2">Headings & Paragraphs</h2><button type="button" class="lesson-done pill mt-3" data-lesson="2"><i class="fa-regular fa-circle-check mr-1"></i>Mark lesson complete</button>
+          <p class="text-sm text-slate-300 leading-7 mt-3">Headings ke liye <code class="text-amber-200">&lt;h1&gt;</code> se <code class="text-amber-200">&lt;h6&gt;</code> tak tags hote hain. <code class="text-amber-200">&lt;h1&gt;</code> main heading ke liye hota hai. Paragraph ke liye <code class="text-amber-200">&lt;p&gt;</code> use karo.</p>
+          <div class="codebox mt-4"><div class="px-4 py-2 border-b border-amber-500/20 text-[11px] text-amber-300 flex justify-between"><span>Example</span><button class="copy-code pill" type="button">Copy code</button></div><pre><code>&lt;h1&gt;Vidya Nirman&lt;/h1&gt;
+&lt;h2&gt;Coding Academy&lt;/h2&gt;
+&lt;p&gt;Main web development seekh raha hoon.&lt;/p&gt;</code></pre></div>
+          <div class="preview mt-4"><h3 class="text-3xl font-bold">Vidya Nirman</h3><h4 class="text-xl font-bold mt-2">Coding Academy</h4><p class="mt-2">Main web development seekh raha hoon.</p></div>
+        </section>
+
+        <section id="lesson3" class="gold-card rounded-2xl p-5 sm:p-7">
+          <span class="text-[10px] font-black tracking-widest text-orange-300">LESSON 03 · LINKS & IMAGES</span><h2 class="font-cinzel text-2xl font-bold text-amber-100 mt-2">Connect pages and show images</h2>
+          <p class="text-sm text-slate-300 leading-7 mt-3">Link ke liye <code class="text-amber-200">&lt;a&gt;</code> tag aur image ke liye <code class="text-amber-200">&lt;img&gt;</code> tag use hota hai. <code class="text-amber-200">href</code> link ka destination hota hai; <code class="text-amber-200">src</code> image ka path.</p>
+          <div class="codebox mt-4"><div class="px-4 py-2 border-b border-amber-500/20 text-[11px] text-amber-300 flex justify-between"><span>Example</span><button class="copy-code pill" type="button">Copy code</button></div><pre><code>&lt;a href="https://vidyanirman.online"&gt;
+  Visit Vidya Nirman
+&lt;/a&gt;
+
+&lt;img src="logo.png" alt="Vidya Nirman logo" width="120"&gt;</code></pre></div>
+          <p class="text-xs text-slate-400 mt-3">Best practice: har meaningful image mein descriptive <code class="text-amber-200">alt</code> text rakho, taaki image load na hone par bhi uska context samajh aaye.</p>
+        </section>
+
+        <section id="lesson4" class="gold-card rounded-2xl p-5 sm:p-7">
+          <span class="text-[10px] font-black tracking-widest text-sky-300">LESSON 04 · CSS BASICS</span><h2 class="font-cinzel text-2xl font-bold text-amber-100 mt-2">Style your webpage with CSS</h2><button type="button" class="lesson-done pill mt-3" data-lesson="4"><i class="fa-regular fa-circle-check mr-1"></i>Mark lesson complete</button>
+          <p class="text-sm text-slate-300 leading-7 mt-3">CSS ka full form Cascading Style Sheets hai. HTML structure banata hai, CSS uska look control karta hai. Selector batata hai kis element ko style karna hai.</p>
+          <div class="codebox mt-4"><div class="px-4 py-2 border-b border-amber-500/20 text-[11px] text-amber-300 flex justify-between"><span>style.css</span><button class="copy-code pill" type="button">Copy code</button></div><pre><code>body {
+  background-color: #fff9e6;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: #8b1e2d;
+  text-align: center;
+}
+
+p {
+  font-size: 18px;
+}</code></pre></div>
+          <p class="text-xs text-slate-400 mt-3">CSS rule mein selector (jaise <code class="text-amber-200">h1</code>), property (jaise <code class="text-amber-200">color</code>) aur value (jaise <code class="text-amber-200">#8b1e2d</code>) hoti hai.</p>
+        </section>
+
+        <section id="lesson5" class="gold-card rounded-2xl p-5 sm:p-7">
+          <span class="text-[10px] font-black tracking-widest text-sky-300">LESSON 05 · CSS CARDS</span><h2 class="font-cinzel text-2xl font-bold text-amber-100 mt-2">Create a simple card</h2><button type="button" class="lesson-done pill mt-3" data-lesson="5"><i class="fa-regular fa-circle-check mr-1"></i>Mark lesson complete</button>
+          <p class="text-sm text-slate-300 leading-7 mt-3">Cards information ko neat box mein dikhate hain. <code class="text-amber-200">padding</code> content ke andar space hai, <code class="text-amber-200">margin</code> element ke bahar space, aur <code class="text-amber-200">border-radius</code> corners ko round karta hai.</p>
+          <div class="codebox mt-4"><div class="px-4 py-2 border-b border-amber-500/20 text-[11px] text-amber-300 flex justify-between"><span>HTML + CSS</span><button class="copy-code pill" type="button">Copy code</button></div><pre><code>&lt;div class="card"&gt;
+  &lt;h2&gt;My First Card&lt;/h2&gt;
+  &lt;p&gt;Practice makes progress!&lt;/p&gt;
+&lt;/div&gt;
+
+/* CSS */
+.card {
+  background: white;
+  color: #220308;
+  padding: 20px;
+  border-radius: 14px;
+  border: 2px solid #d4af37;
+}</code></pre></div>
+          <div class="preview mt-4"><div style="background:#fff9e6;color:#220308;padding:18px;border-radius:14px;border:2px solid #d4af37"><h3 class="text-xl font-bold">My First Card</h3><p class="mt-2">Practice makes progress!</p></div></div>
+        </section>
+
+        <section id="lesson6" class="gold-card rounded-2xl p-5 sm:p-7">
+          <span class="text-[10px] font-black tracking-widest text-yellow-300">LESSON 06 · JAVASCRIPT</span><h2 class="font-cinzel text-2xl font-bold text-amber-100 mt-2">Variables and values</h2><button type="button" class="lesson-done pill mt-3" data-lesson="6"><i class="fa-regular fa-circle-check mr-1"></i>Mark lesson complete</button>
+          <p class="text-sm text-slate-300 leading-7 mt-3">JavaScript webpage mein logic aur actions add karta hai. Variable ek named container jaisa hai jisme value store kar sakte hain. Modern JS mein values ke liye aksar <code class="text-amber-200">const</code> ya <code class="text-amber-200">let</code> use hote hain.</p>
+          <div class="codebox mt-4"><div class="px-4 py-2 border-b border-amber-500/20 text-[11px] text-amber-300 flex justify-between"><span>script.js</span><button class="copy-code pill" type="button">Copy code</button></div><pre><code>const student = "Learner";
+let lessonsCompleted = 1;
+
+console.log("Hello, " + student);
+console.log(lessonsCompleted);</code></pre></div>
+          <p class="text-xs text-slate-400 mt-3"><code class="text-amber-200">const</code> ko dobara assign nahi kar sakte; <code class="text-amber-200">let</code> ko update kar sakte hain. <code class="text-amber-200">console.log()</code> developer console mein output dikhata hai.</p>
+        </section>
+
+        <section id="lesson7" class="gold-card rounded-2xl p-5 sm:p-7">
+          <span class="text-[10px] font-black tracking-widest text-yellow-300">LESSON 07 · INTERACTIVITY</span><h2 class="font-cinzel text-2xl font-bold text-amber-100 mt-2">Make a button work</h2><button type="button" class="lesson-done pill mt-3" data-lesson="7"><i class="fa-regular fa-circle-check mr-1"></i>Mark lesson complete</button>
+          <p class="text-sm text-slate-300 leading-7 mt-3">Event ka matlab user action, jaise click. <code class="text-amber-200">addEventListener()</code> kisi action par code chalata hai. Neeche button click karke dekho.</p>
+          <div class="codebox mt-4"><div class="px-4 py-2 border-b border-amber-500/20 text-[11px] text-amber-300 flex justify-between"><span>HTML + JavaScript</span><button class="copy-code pill" type="button">Copy code</button></div><pre><code>&lt;button id="helloBtn"&gt;Click me&lt;/button&gt;
+&lt;p id="message"&gt;&lt;/p&gt;
+
+&lt;script&gt;
+document.getElementById("helloBtn")
+  .addEventListener("click", function() {
+    document.getElementById("message").textContent =
+      "Great job! Button works.";
+  });
+&lt;/script&gt;</code></pre></div>
+          <div class="preview mt-4"><button id="demoBtn" class="rounded-lg bg-[#3b0810] px-4 py-2 font-bold text-white">Click me</button><p id="demoMessage" class="mt-3 font-semibold"></p></div>
+        </section>
+
+
+        <section id="lesson8" class="gold-card rounded-2xl p-5 sm:p-7">
+          <span class="text-[10px] font-black tracking-widest text-sky-300">LESSON 08 · RESPONSIVE DESIGN</span><h2 class="font-cinzel text-2xl font-bold text-amber-100 mt-2">Mobile-friendly website banao</h2><button type="button" class="lesson-done pill mt-3" data-lesson="8"><i class="fa-regular fa-circle-check mr-1"></i>Mark lesson complete</button>
+          <p class="text-sm text-slate-300 leading-7 mt-3">Responsive design ka matlab page mobile, tablet aur computer par achchhe se fit ho. Viewport meta tag browser ko screen width ke hisaab se page render karne mein help karta hai. CSS media query screen ki width ke hisaab se style badal sakti hai.</p>
+          <div class="codebox mt-4"><div class="px-4 py-2 border-b border-amber-500/20 text-[11px] text-amber-300 flex justify-between"><span>Responsive CSS</span><button class="copy-code pill" type="button">Copy code</button></div><pre><code>.container {
+  width: min(100% - 32px, 900px);
+  margin-inline: auto;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 650px) {
+  .cards { grid-template-columns: 1fr; }
+}</code></pre></div>
+          <p class="text-xs text-slate-400 mt-3">Tip: page ko test karne ke liye browser window chhoti karo. Mobile layout mein horizontal scrolling avoid karo.</p>
+        </section>
+
+        <section id="lesson9" class="gold-card rounded-2xl p-5 sm:p-7">
+          <span class="text-[10px] font-black tracking-widest text-orange-300">LESSON 09 · HTML FORMS</span><h2 class="font-cinzel text-2xl font-bold text-amber-100 mt-2">Forms aur user input</h2><button type="button" class="lesson-done pill mt-3" data-lesson="9"><i class="fa-regular fa-circle-check mr-1"></i>Mark lesson complete</button>
+          <p class="text-sm text-slate-300 leading-7 mt-3">Forms se user naam, email ya message enter kar sakta hai. Har input ko label dena accessibility ke liye achchha hai. Ye demo sirf browser mein kaam karta hai; data kisi server par send nahi hota.</p>
+          <div class="codebox mt-4"><div class="px-4 py-2 border-b border-amber-500/20 text-[11px] text-amber-300 flex justify-between"><span>HTML form</span><button class="copy-code pill" type="button">Copy code</button></div><pre><code>&lt;form&gt;
+  &lt;label for="studentName"&gt;Your name&lt;/label&gt;
+  &lt;input id="studentName" type="text" required&gt;
+  &lt;button type="submit"&gt;Say hello&lt;/button&gt;
+&lt;/form&gt;</code></pre></div>
+          <div class="preview mt-4"><form id="helloForm" class="flex flex-col sm:flex-row gap-3 items-start sm:items-end"><div class="flex-1 w-full"><label for="studentName" class="block text-sm font-semibold mb-1">Your name</label><input id="studentName" required maxlength="40" class="w-full border rounded-lg px-3 py-2" style="color:#222" placeholder="Apna naam likho"></div><button class="rounded-lg bg-[#3b0810] px-4 py-2 font-bold text-white" type="submit">Say hello</button></form><p id="formMessage" class="mt-3 font-semibold" aria-live="polite"></p></div>
+        </section>
+
+        <section id="lesson10" class="gold-card rounded-2xl p-5 sm:p-7">
+          <span class="text-[10px] font-black tracking-widest text-yellow-300">LESSON 10 · JAVASCRIPT LOGIC</span><h2 class="font-cinzel text-2xl font-bold text-amber-100 mt-2">Functions aur if/else</h2><button type="button" class="lesson-done pill mt-3" data-lesson="10"><i class="fa-regular fa-circle-check mr-1"></i>Mark lesson complete</button>
+          <p class="text-sm text-slate-300 leading-7 mt-3">Function reusable code ka block hai. <code class="text-amber-200">if/else</code> condition ke basis par decision leta hai.</p>
+          <div class="codebox mt-4"><div class="px-4 py-2 border-b border-amber-500/20 text-[11px] text-amber-300 flex justify-between"><span>script.js</span><button class="copy-code pill" type="button">Copy code</button></div><pre><code>function checkMarks(marks) {
+  if (marks >= 33) {
+    return "Pass";
+  } else {
+    return "Keep practising";
+  }
+}
+
+console.log(checkMarks(78));</code></pre></div>
+          <p class="text-xs text-slate-400 mt-3">Real applications mein marks ya personal data ko validate karne ke liye sirf browser-side check par depend mat karo; server-side validation bhi zaroori ho sakti hai.</p>
+        </section>
+
+        <section id="playground" class="gold-card rounded-2xl p-5 sm:p-7">
+          <span class="text-[10px] font-black tracking-widest text-emerald-300">INTERACTIVE WORKSHOP</span><h2 class="font-cinzel text-2xl font-bold text-amber-100 mt-2">Live Code Lab</h2>
+          <p class="text-sm text-slate-300 leading-7 mt-3">Yahin code badlo aur <b class="text-amber-200">Run Preview</b> dabao. HTML, CSS aur JavaScript ek hi mini editor mein test kar sakte ho. Ye preview tumhare code ko isolated iframe mein chalata hai; apna code hi run karo.</p>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
+            <div><label for="labCode" class="block text-xs font-bold text-amber-200 mb-2">HTML + CSS + JavaScript</label><textarea id="labCode" spellcheck="false" class="w-full min-h-[330px] rounded-xl border border-amber-500/30 bg-[#090103] p-4 text-xs sm:text-sm text-amber-100 font-mono leading-6" aria-label="Live code editor"><!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: Arial; padding: 20px; background: #fff9e6; }
+  h1 { color: #8b1e2d; }
+  button { padding: 10px 14px; background: #8b1e2d; color: white; border: 0; border-radius: 8px; }
+</style>
+</head>
+<body>
+  <h1>Namaste, coder! 👋</h1>
+  <p>Ye tumhari live preview hai.</p>
+  <button onclick="document.getElementById('msg').textContent='Shabash! Tumhara code chal gaya.'">Click me</button>
+  <p id="msg"></p>
+<script>if('serviceWorker'in navigator&&location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));</script>
+</body>
+</html></textarea><div class="flex flex-wrap gap-2 mt-3"><button id="runLab" class="rounded-xl bg-gradient-to-r from-amber-400 to-yellow-600 px-4 py-3 text-sm font-black text-[#220308]"><i class="fa-solid fa-play mr-2"></i>Run Preview</button><button id="resetLab" class="pill" type="button">Reset example</button><button id="downloadLab" class="pill" type="button">Download HTML</button></div><p id="labStatus" class="text-xs text-slate-400 mt-2" aria-live="polite">Editor ready. Code edit karke run karo.</p></div>
+            <div><div class="flex items-center justify-between mb-2"><label class="text-xs font-bold text-amber-200">Browser preview</label><span class="text-[10px] text-slate-400">Sandboxed</span></div><iframe id="labPreview" title="Live code preview" sandbox="allow-scripts" referrerpolicy="no-referrer" class="w-full min-h-[390px] rounded-xl bg-white border border-amber-500/30"></iframe><p class="text-xs text-slate-400 mt-2">Note: preview isolated hai. Network/API access ya server par data save karna is lab ka feature nahi hai.</p></div>
+          </div>
+        </section>
+
+        <section id="projects" class="gold-card rounded-2xl p-5 sm:p-7">
+          <span class="text-[10px] font-black tracking-widest text-violet-300">BUILD SOMETHING REAL</span><h2 class="font-cinzel text-2xl font-bold text-amber-100 mt-2">Mini Project Roadmap</h2><p class="text-sm text-slate-300 mt-3 leading-7">Concept samajhne ka best tareeka chhote projects banana hai. Ek project complete karne ke baad hi next level par jao.</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
+            <article class="rounded-xl border border-amber-500/20 p-4"><div class="text-2xl">👋</div><h3 class="font-bold text-amber-100 mt-2">01 · Personal intro card</h3><p class="text-xs text-slate-300 mt-2 leading-5">HTML headings, image, paragraph aur CSS card design use karo.</p><span class="pill inline-block mt-3">Beginner</span></article>
+            <article class="rounded-xl border border-amber-500/20 p-4"><div class="text-2xl">🧮</div><h3 class="font-bold text-amber-100 mt-2">02 · Simple calculator</h3><p class="text-xs text-slate-300 mt-2 leading-5">Number inputs, button click, functions aur basic maths practice karo.</p><span class="pill inline-block mt-3">Beginner+</span></article>
+            <article class="rounded-xl border border-amber-500/20 p-4"><div class="text-2xl">✅</div><h3 class="font-bold text-amber-100 mt-2">03 · Study task list</h3><p class="text-xs text-slate-300 mt-2 leading-5">Input se task add karo, complete mark karo aur delete button banao.</p><span class="pill inline-block mt-3">Intermediate</span></article>
+            <article class="rounded-xl border border-amber-500/20 p-4"><div class="text-2xl">📚</div><h3 class="font-bold text-amber-100 mt-2">04 · Student quiz</h3><p class="text-xs text-slate-300 mt-2 leading-5">Multiple-choice questions, score counter aur feedback message banao.</p><span class="pill inline-block mt-3">Intermediate</span></article>
+          </div>
+          <div class="mt-5 rounded-xl bg-[#160207] border border-amber-500/20 p-4"><h3 class="font-bold text-amber-200">Project checklist</h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3 text-sm"><label class="flex gap-2 items-start"><input type="checkbox" class="project-check mt-1 accent-amber-400"> Page structure complete</label><label class="flex gap-2 items-start"><input type="checkbox" class="project-check mt-1 accent-amber-400"> CSS design added</label><label class="flex gap-2 items-start"><input type="checkbox" class="project-check mt-1 accent-amber-400"> Mobile layout checked</label><label class="flex gap-2 items-start"><input type="checkbox" class="project-check mt-1 accent-amber-400"> Buttons tested</label></div><p id="projectProgress" class="text-xs text-amber-200 mt-3">Project progress: 0/4</p></div>
+        </section>
+
+
+        <section id="courses" class="gold-card rounded-2xl p-5 sm:p-7">
+          <span class="text-[10px] font-black tracking-widest text-sky-300">CHOOSE YOUR LEARNING PATH</span>
+          <h2 class="font-cinzel text-2xl font-bold text-amber-100 mt-2">Course Explorer</h2>
+          <p class="text-sm text-slate-300 mt-3 leading-7">Apni pasand ka topic search karo. Har path mein short concept, example aur ek practice task hai. Python browser ke is HTML lab mein execute nahi hota; use local Python interpreter ya trusted online Python environment mein run karna hoga.</p>
+          <label for="courseSearch" class="block text-xs text-amber-200 font-bold mt-4 mb-2">Find a course</label><input id="courseSearch" class="w-full rounded-xl border border-amber-500/30 bg-[#100206] text-amber-50 p-3 text-sm" placeholder="Search: Python, CSS, Git, accessibility…">
+          <div id="courseGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+            <article class="course-card rounded-xl border border-amber-500/20 p-4" data-search="html structure beginner tags"><span class="pill">Beginner · 20 min</span><h3 class="font-bold text-amber-100 mt-3">HTML Foundations</h3><p class="text-xs text-slate-300 mt-2 leading-5">Tags, semantic structure, links, images, lists and forms.</p><p class="text-xs text-amber-200 mt-3"><code>&lt;main&gt; ... &lt;/main&gt;</code></p><button class="pill mt-3 course-task" data-task="Create a page with a title, one paragraph, a list of three goals and a link." type="button">Show practice task</button><p class="course-task-output text-xs text-emerald-200 mt-2" aria-live="polite"></p></article>
+            <article class="course-card rounded-xl border border-amber-500/20 p-4" data-search="css layout responsive design"><span class="pill">Beginner · 25 min</span><h3 class="font-bold text-amber-100 mt-3">CSS Design Studio</h3><p class="text-xs text-slate-300 mt-2 leading-5">Selectors, spacing, Flexbox, Grid, colour contrast and responsive rules.</p><p class="text-xs text-amber-200 mt-3"><code>display: grid;</code></p><button class="pill mt-3 course-task" data-task="Design three cards with equal gaps, rounded corners and a one-column layout on narrow screens." type="button">Show practice task</button><p class="course-task-output text-xs text-emerald-200 mt-2" aria-live="polite"></p></article>
+            <article class="course-card rounded-xl border border-amber-500/20 p-4" data-search="javascript js functions arrays dom events"><span class="pill">Beginner+ · 30 min</span><h3 class="font-bold text-amber-100 mt-3">JavaScript Essentials</h3><p class="text-xs text-slate-300 mt-2 leading-5">Variables, conditions, functions, arrays, events and DOM updates.</p><p class="text-xs text-amber-200 mt-3"><code>button.addEventListener(...)</code></p><button class="pill mt-3 course-task" data-task="Make a counter with +1 and reset buttons. Keep the displayed count in a variable." type="button">Show practice task</button><p class="course-task-output text-xs text-emerald-200 mt-2" aria-live="polite"></p></article>
+            <article class="course-card rounded-xl border border-amber-500/20 p-4" data-search="python print variables loops lists beginner"><span class="pill">Beginner · 25 min</span><h3 class="font-bold text-amber-100 mt-3">Python Starter</h3><p class="text-xs text-slate-300 mt-2 leading-5">print(), variables, if/else, loops and lists in readable syntax.</p><div class="codebox mt-3"><pre><code>name = "Coder"
+for step in range(1, 4):
+    print(step, name)</code></pre></div><button class="pill mt-3 course-task" data-task="Write a Python program that stores your favourite subject in a variable and prints it three times using a loop." type="button">Show practice task</button><p class="course-task-output text-xs text-emerald-200 mt-2" aria-live="polite"></p></article>
+            <article class="course-card rounded-xl border border-amber-500/20 p-4" data-search="git github version control deploy"><span class="pill">Workflow · 15 min</span><h3 class="font-bold text-amber-100 mt-3">Git & GitHub Basics</h3><p class="text-xs text-slate-300 mt-2 leading-5">Understand repositories, commits, version history and publishing static pages.</p><p class="text-xs text-amber-200 mt-3"><code>edit → review → commit</code></p><button class="pill mt-3 course-task" data-task="Create a backup before editing a website file, then make one small change and commit it with a clear message." type="button">Show practice task</button><p class="course-task-output text-xs text-emerald-200 mt-2" aria-live="polite"></p></article>
+            <article class="course-card rounded-xl border border-amber-500/20 p-4" data-search="accessibility a11y keyboard labels semantic"><span class="pill">Good practice · 15 min</span><h3 class="font-bold text-amber-100 mt-3">Accessible Web Design</h3><p class="text-xs text-slate-300 mt-2 leading-5">Labels, alt text, keyboard navigation, readable contrast and meaningful headings.</p><p class="text-xs text-amber-200 mt-3"><code>&lt;label for="name"&gt;</code></p><button class="pill mt-3 course-task" data-task="Add a label to every form input and meaningful alt text to informative images." type="button">Show practice task</button><p class="course-task-output text-xs text-emerald-200 mt-2" aria-live="polite"></p></article>
+          </div><p id="courseSearchStatus" class="text-xs text-slate-400 mt-3" aria-live="polite">Showing all 6 learning paths.</p>
+        </section>
+
+        <section id="ai-tutor" class="gold-card rounded-2xl p-5 sm:p-7">
+          <span class="text-[10px] font-black tracking-widest text-violet-300">YOUR CODING STUDY PARTNER</span><h2 class="font-cinzel text-2xl font-bold text-amber-100 mt-2"><i class="fa-solid fa-robot mr-2"></i>VN AI Coding Tutor</h2>
+          <p class="text-sm text-slate-300 mt-3 leading-7">Hinglish mein sawaal poochho: error samjhao, code review karo, ya practice problem do. Ye feature tumhare existing Vidya Nirman AI backend ko use karta hai. Agar backend unavailable ho ya CORS/API issue aaye, to neeche error message milega; API key kabhi is HTML file mein mat daalna.</p>
+          <div class="flex flex-wrap gap-2 mt-4"><button class="pill ai-prompt" type="button" data-prompt="Explain HTML, CSS and JavaScript using a simple real-life example in Hinglish.">Explain basics</button><button class="pill ai-prompt" type="button" data-prompt="Give me one beginner JavaScript challenge. Do not reveal the solution until I ask.">Give me a challenge</button><button class="pill ai-prompt" type="button" data-prompt="Teach me Python variables and loops in simple Hinglish with a short example.">Learn Python</button></div>
+          <div id="aiMessages" class="mt-4 space-y-3 max-h-80 overflow-y-auto rounded-xl border border-amber-500/20 bg-black/20 p-4" aria-live="polite"><div class="rounded-xl bg-[#2a0a11] border border-amber-500/20 p-3 text-sm text-amber-100">Namaste coder! 👋 Apna question bhejo. Main tumhe step-by-step samjhane ki koshish karunga.</div></div>
+          <form id="aiTutorForm" class="mt-3 flex flex-col sm:flex-row gap-2"><label class="sr-only" for="aiTutorInput">Ask the AI coding tutor</label><input id="aiTutorInput" maxlength="2000" required class="flex-1 rounded-xl border border-amber-500/30 bg-[#100206] p-3 text-sm text-amber-50" placeholder="Example: CSS flexbox kya hota hai?" autocomplete="off"><button id="aiTutorSend" class="rounded-xl bg-gradient-to-r from-amber-400 to-yellow-600 px-5 py-3 text-sm font-black text-[#220308]" type="submit">Ask VN AI <i class="fa-solid fa-paper-plane ml-1"></i></button></form>
+          <p id="aiTutorStatus" class="text-xs text-slate-400 mt-2" role="status">No account required. Messages are sent to the configured VN AI backend.</p>
+        </section>
+
+        <section id="certificate" class="gold-card rounded-2xl p-5 sm:p-7">
+          <span class="text-[10px] font-black tracking-widest text-amber-300">CELEBRATE YOUR PROGRESS</span><h2 class="font-cinzel text-2xl font-bold text-amber-100 mt-2">Course Completion Certificate</h2>
+          <p class="text-sm text-slate-300 mt-3 leading-7">Apna naam aur course choose karo. Certificate generate karne se pehle kam se kam 8 of 10 core lessons complete karna hoga. Ye locally generated learning certificate hai, official/accredited credential nahi hai.</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4"><div><label for="certName" class="block text-xs text-amber-200 font-bold mb-2">Student name</label><input id="certName" maxlength="60" class="w-full rounded-xl border border-amber-500/30 bg-[#100206] p-3 text-sm text-amber-50" placeholder="Your full name"></div><div><label for="certCourse" class="block text-xs text-amber-200 font-bold mb-2">Course</label><select id="certCourse" class="w-full rounded-xl border border-amber-500/30 bg-[#100206] p-3 text-sm text-amber-50"><option>Web Development Basics</option><option>HTML Foundations</option><option>CSS Design Studio</option><option>JavaScript Essentials</option><option>Python Starter</option></select></div></div>
+          <div class="flex flex-wrap gap-2 mt-4"><button id="generateCert" class="rounded-xl bg-gradient-to-r from-amber-400 to-yellow-600 px-5 py-3 text-sm font-black text-[#220308]" type="button">Generate certificate</button><button id="printCert" class="pill" type="button" disabled>Print / Save as PDF</button></div><p id="certStatus" class="text-xs text-amber-200 mt-3" role="status">Complete at least 8 lessons to unlock certificate generation.</p>
+          <div id="certificatePaper" class="hidden mt-6 border-4 border-double border-[#D4AF37] bg-[#fff9e6] text-[#220308] p-6 sm:p-10 text-center"><p class="text-xs tracking-[.3em] font-bold">VIDYA NIRMAN · CODING ACADEMY</p><div class="text-4xl mt-4">🏅</div><h3 class="font-cinzel text-3xl sm:text-4xl font-black mt-4">Certificate of Completion</h3><p class="mt-5">This certificate is presented to</p><p id="certStudentDisplay" class="font-cinzel text-2xl sm:text-3xl font-bold border-b border-[#D4AF37] inline-block px-5 py-3"></p><p class="mt-5">for completing the learning path</p><p id="certCourseDisplay" class="font-bold text-xl mt-2"></p><p id="certDateDisplay" class="text-sm mt-6"></p><p id="certIdDisplay" class="text-[10px] mt-5 text-slate-600"></p><p class="text-[10px] mt-5">Self-paced educational achievement · Not an accredited qualification</p></div>
+        </section>
+
+        <section id="cheatsheet" class="gold-card rounded-2xl p-5 sm:p-7">
+          <span class="text-[10px] font-black tracking-widest text-amber-300">QUICK REVISION</span><h2 class="font-cinzel text-2xl font-bold text-amber-100 mt-2">Coding Cheat Sheet</h2>
+          <div class="overflow-x-auto mt-4"><table class="w-full text-sm text-left"><thead><tr class="text-amber-200 border-b border-amber-500/30"><th class="py-3 pr-4">Topic</th><th class="py-3 pr-4">Example</th><th class="py-3">Use</th></tr></thead><tbody class="text-slate-300"><tr class="border-b border-amber-500/10"><td class="py-3 pr-4">HTML heading</td><td class="py-3 pr-4"><code>&lt;h1&gt;Title&lt;/h1&gt;</code></td><td class="py-3">Heading</td></tr><tr class="border-b border-amber-500/10"><td class="py-3 pr-4">HTML link</td><td class="py-3 pr-4"><code>&lt;a href="..."&gt;</code></td><td class="py-3">Navigation</td></tr><tr class="border-b border-amber-500/10"><td class="py-3 pr-4">CSS colour</td><td class="py-3 pr-4"><code>color: red;</code></td><td class="py-3">Text colour</td></tr><tr class="border-b border-amber-500/10"><td class="py-3 pr-4">CSS spacing</td><td class="py-3 pr-4"><code>padding: 16px;</code></td><td class="py-3">Inner space</td></tr><tr class="border-b border-amber-500/10"><td class="py-3 pr-4">JS variable</td><td class="py-3 pr-4"><code>const name = "A";</code></td><td class="py-3">Store a value</td></tr><tr><td class="py-3 pr-4">JS condition</td><td class="py-3 pr-4"><code>if (score &gt; 5) { ... }</code></td><td class="py-3">Make a decision</td></tr></tbody></table></div>
+        </section>
+
+        <section id="practice" class="gold-card rounded-2xl p-5 sm:p-7">
+          <span class="text-[10px] font-black tracking-widest text-amber-300">CODING KNOWLEDGE CHECK</span><h2 class="font-cinzel text-2xl font-bold text-amber-100 mt-2">50-Question Coding Challenge</h2>
+          <p class="text-sm text-slate-300 mt-3 leading-7">HTML, CSS, JavaScript, Python aur web basics. 10, 20 ya saare 50 questions choose karo. Answers end mein reveal honge, taaki pehle khud try kar sako.</p>
+          <div class="flex flex-wrap gap-3 items-end mt-4"><div><label for="quizCount" class="block text-xs text-amber-200 mb-2">Questions</label><select id="quizCount" class="rounded-xl border border-amber-500/30 bg-[#100206] p-3 text-sm text-amber-50"><option value="10">Quick practice · 10</option><option value="20">Focused practice · 20</option><option value="50">Full challenge · 50</option></select></div><button id="startQuiz" class="rounded-xl bg-gradient-to-r from-amber-400 to-yellow-600 px-5 py-3 text-sm font-black text-[#220308]">Start quiz</button><button id="restartQuiz" class="pill" type="button">Restart / reshuffle</button></div>
+          <div id="quizArea" class="mt-5 rounded-xl border border-amber-500/20 p-4 sm:p-5"><p class="text-sm text-slate-300">Press “Start quiz” to begin. You can review your answers at the end.</p></div>
+          <p id="quizFinal" class="mt-4 text-sm text-amber-200" aria-live="polite"></p>
+        </section>
+
+        <section class="rounded-2xl border border-violet-400/30 bg-violet-500/10 p-5 sm:p-7">
+          <h2 class="font-cinzel text-xl font-bold text-violet-200"><i class="fa-solid fa-flag-checkered mr-2"></i>Your first mini challenge</h2>
+          <p class="text-sm text-slate-300 leading-7 mt-3">Ek webpage banao jisme tumhara naam <code class="text-amber-200">&lt;h1&gt;</code> mein ho, ek paragraph mein tumhara goal ho, aur CSS se heading ka colour change ho. Phir ek button add karo jo click karne par “I am learning to code!” show kare.</p>
+          <p class="text-xs text-slate-400 mt-3">Tip: HTML file ko <code class="text-amber-200">index.html</code> naam se save karo, phir browser mein open karo. Live Code Lab mein tum apna code run kar sakte ho.</p>
+        </section>
+      </div>
+    </div>
+    <footer class="text-center text-xs text-slate-500 py-12">© 2026 Vidya Nirman · VN Coding Academy <span class="mx-2">•</span><a class="text-amber-300 hover:underline" href="index.html">Back to Homepage</a></footer>
+  </main>
+  <script>
+    document.querySelectorAll('.copy-code').forEach(button => {
+      button.addEventListener('click', async () => {
+        const code = button.closest('.codebox').querySelector('code').innerText;
+        try {
+          await navigator.clipboard.writeText(code);
+          button.textContent = 'Copied!';
+          setTimeout(() => button.textContent = 'Copy code', 1400);
+        } catch (error) {
+          button.textContent = 'Select code to copy';
+        }
+      });
+    });
+    document.getElementById('demoBtn').addEventListener('click', () => {
+      document.getElementById('demoMessage').textContent = 'Great job! Button works. 🎉';
+    });
+    const answered = new Set();
+    document.querySelectorAll('.quiz-option').forEach(button => {
+      button.addEventListener('click', () => {
+        const q = button.dataset.q;
+        const isCorrect = button.dataset.correct === 'true';
+        document.getElementById('answer' + q).classList.add('show');
+        const feedback = document.getElementById('quizFeedback');
+        if (isCorrect) {
+          if (!answered.has(q)) answered.add(q);
+          feedback.textContent = 'Nice! Correct answers: ' + answered.size + ' / 3';
+          button.style.borderColor = '#4ade80';
+        } else {
+          feedback.textContent = 'Not quite — try another option. Hint: review the lesson above.';
+          button.style.borderColor = '#fb7185';
+        }
+      });
+    });
+
+    // Interactive live code lab: iframe is sandboxed; no same-origin access.
+    const labDefault = document.getElementById('labCode').value;
+    const labCode = document.getElementById('labCode');
+    const labPreview = document.getElementById('labPreview');
+    function runLab(){
+      labPreview.srcdoc = labCode.value;
+      document.getElementById('labStatus').textContent = 'Preview updated. Apne code ko change karke dobara run karo.';
+    }
+    document.getElementById('runLab').addEventListener('click', runLab);
+    document.getElementById('resetLab').addEventListener('click', () => { labCode.value = labDefault; runLab(); document.getElementById('labStatus').textContent='Example reset ho gaya.'; });
+    document.getElementById('downloadLab').addEventListener('click', () => {
+      const blob = new Blob([labCode.value], {type:'text/html;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href=url; a.download='my-vn-project.html'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+      document.getElementById('labStatus').textContent='HTML file download start ho gaya.';
+    });
+    runLab();
+    document.getElementById('helloForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const name = document.getElementById('studentName').value.trim().slice(0,40);
+      document.getElementById('formMessage').textContent = name ? 'Namaste, ' + name + '! Coding seekhne ke liye shabash. 🎉' : 'Pehle apna naam likho.';
+    });
+    // Save lesson and checklist progress in this browser only.
+    const progressKey='vnCodingAcademyLessonsV2';
+    let completedLessons=[];
+    try { completedLessons=JSON.parse(localStorage.getItem(progressKey)||'[]'); if(!Array.isArray(completedLessons)) completedLessons=[]; } catch(e) { completedLessons=[]; }
+    function updateLessonProgress(){
+      document.querySelectorAll('.lesson-done').forEach(btn=>{
+        const done=completedLessons.includes(Number(btn.dataset.lesson));
+        btn.classList.toggle('done',done);
+        btn.innerHTML=done?'<i class="fa-solid fa-circle-check mr-1"></i>Completed — click to undo':'<i class="fa-regular fa-circle-check mr-1"></i>Mark lesson complete';
+      });
+      const count=completedLessons.length;
+      document.getElementById('lessonProgressCount').textContent=count+' / 10';
+      document.getElementById('lessonProgressBar').style.width=(count*10)+'%';
+      document.getElementById('lessonProgressLabel').textContent=count===10?'All lessons completed! Great work!':'Lessons completed';
+      try { localStorage.setItem(progressKey,JSON.stringify(completedLessons)); } catch(e) {}
+    }
+    document.querySelectorAll('.lesson-done').forEach(btn=>btn.addEventListener('click',()=>{
+      const id=Number(btn.dataset.lesson);
+      completedLessons=completedLessons.includes(id)?completedLessons.filter(n=>n!==id):[...completedLessons,id];
+      updateLessonProgress();
+    }));
+    updateLessonProgress();
+    const checks=[...document.querySelectorAll('.project-check')];
+    const projectKey='vnCodingAcademyProjectChecksV1';
+    try { const saved=JSON.parse(localStorage.getItem(projectKey)||'[]'); checks.forEach((c,i)=>c.checked=Boolean(saved[i])); } catch(e) {}
+    function updateProjectProgress(){
+      const n=checks.filter(c=>c.checked).length;
+      document.getElementById('projectProgress').textContent='Project progress: '+n+'/'+checks.length+(n===checks.length?' — Ready to share!':'');
+      try { localStorage.setItem(projectKey,JSON.stringify(checks.map(c=>c.checked))); } catch(e) {}
+    }
+    updateProjectProgress();
+
+    // Mobile navigation
+    const mobileMenuBtn=document.getElementById('mobileMenuBtn');
+    const mobileMenu=document.getElementById('mobileMenu');
+    if(mobileMenuBtn && mobileMenu){ mobileMenuBtn.addEventListener('click',()=>{const open=mobileMenu.classList.toggle('hidden')===false;mobileMenuBtn.setAttribute('aria-expanded',String(open));}); mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mobileMenu.classList.add('hidden');mobileMenuBtn.setAttribute('aria-expanded','false');})); }
+
+    // Searchable course cards
+    const courseSearch=document.getElementById('courseSearch');
+    courseSearch.addEventListener('input',()=>{const q=courseSearch.value.trim().toLowerCase();let visible=0;document.querySelectorAll('.course-card').forEach(card=>{const show=(card.dataset.search+' '+card.innerText).toLowerCase().includes(q);card.classList.toggle('hidden',!show);if(show)visible++;});document.getElementById('courseSearchStatus').textContent='Showing '+visible+' learning path'+(visible===1?'':'s')+'.';});
+    document.querySelectorAll('.course-task').forEach(btn=>btn.addEventListener('click',()=>{btn.nextElementSibling.textContent=btn.dataset.task;}));
+
+    // VN AI tutor: uses the same public backend endpoint as the existing homepage AI.
+    const AI_API_URL='https://vidya-nirman-ai.onrender.com/api/chat';
+    const aiForm=document.getElementById('aiTutorForm'), aiInput=document.getElementById('aiTutorInput'), aiSend=document.getElementById('aiTutorSend'), aiMessages=document.getElementById('aiMessages'), aiStatus=document.getElementById('aiTutorStatus');
+    const aiHistory=[];
+    function addAiMessage(text,role){const node=document.createElement('div');node.className='rounded-xl p-3 text-sm whitespace-pre-wrap '+(role==='user'?'bg-[#4a1420] border border-amber-500/30 text-amber-50':'bg-[#2a0a11] border border-amber-500/20 text-amber-100');node.textContent=text;aiMessages.appendChild(node);aiMessages.scrollTop=aiMessages.scrollHeight;return node;}
+    document.querySelectorAll('.ai-prompt').forEach(b=>b.addEventListener('click',()=>{aiInput.value=b.dataset.prompt;aiInput.focus();}));
+    aiForm.addEventListener('submit',async e=>{e.preventDefault();const message=aiInput.value.trim();if(!message||aiSend.disabled)return;addAiMessage(message,'user');aiHistory.push({role:'user',content:message});aiInput.value='';aiSend.disabled=true;aiSend.textContent='Thinking…';aiStatus.textContent='VN AI se response aa raha hai…';const pending=addAiMessage('Soch raha hoon…','assistant');try{const res=await fetch(AI_API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:aiHistory})});let data={};try{data=await res.json();}catch(_){}if(!res.ok)throw new Error(data.error||('Server error '+res.status));if(typeof data.answer!=='string'||!data.answer.trim())throw new Error('AI backend se readable answer nahi mila.');pending.textContent=data.answer;aiHistory.push({role:'assistant',content:data.answer});aiStatus.textContent='Answer received. API keys backend par hi rehni chahiye.';}catch(err){pending.textContent='AI tutor abhi connect nahi ho paaya. '+err.message+' — backend health, CORS origin aur /api/chat route check karo.';aiStatus.textContent='Connection failed. This feature needs the VN AI backend to be online and configured.';}finally{aiSend.disabled=false;aiSend.innerHTML='Ask VN AI <i class="fa-solid fa-paper-plane ml-1"></i>';}});
+
+    // 50-question coding quiz. Questions are kept local; no data is sent to a server.
+    const questionBank=[
+      ['Which HTML element is commonly used for the main page heading?','<h1>','<head>','<p>','<title>',0,'<h1> is a visible level-one heading.'],
+      ['Which HTML element creates a hyperlink?','<link>','<a>','<href>','<navto>',1,'The anchor element <a> uses href for its destination.'],
+      ['Which attribute provides alternative text for an image?','title','src','alt','role',2,'alt text communicates an image’s meaning when it cannot be seen.'],
+      ['Which element represents an unordered list?','<ol>','<ul>','<li>','<dl>',1,'<ul> creates a bulleted list.'],
+      ['What is the correct HTML5 doctype?','<!DOCTYPE html>','<doctype html5>','<!HTML>','<head type="html">',0,'The HTML5 doctype declaration is <!DOCTYPE html>.'],
+      ['Which element is best for a page’s main content?','<span>','<b>','<main>','<small>',2,'<main> identifies the dominant page content.'],
+      ['Which input type is intended for an email address?','type="mailbox"','type="email"','type="text-email"','type="address"',1,'type="email" provides email-oriented input semantics and validation.'],
+      ['Which attribute connects a label to an input by id?','name','for','value','action',1,'The label’s for value matches the input id.'],
+      ['Which CSS property changes text colour?','font-color','text-style','color','background-color',2,'color sets foreground text colour.'],
+      ['Which CSS property adds space inside an element’s border?','margin','padding','outline','gap-only',1,'padding is the inner space between content and border.'],
+      ['Which CSS property rounds corners?','corner-style','border-radius','round','shape',1,'border-radius rounds an element’s corners.'],
+      ['Which selector targets an element with id="hero"?',' .hero ','#hero','hero()','*hero',1,'An ID selector starts with #.'],
+      ['Which selector targets elements with class="card"?','#card','.card','card#','@card',1,'A class selector starts with a period.'],
+      ['Which CSS layout system is designed for one-dimensional rows or columns?','Flexbox','SQL','Canvas only','XML',0,'Flexbox is well suited to arranging items along one axis.'],
+      ['Which rule applies styles when the viewport is 600px wide or narrower?','@screen 600','@media (max-width: 600px)','@responsive(600)','if width < 600',1,'A media query can apply CSS based on viewport width.'],
+      ['What does box-sizing: border-box do?','Hides borders','Includes padding and border in declared width/height','Adds a shadow','Makes width automatic',1,'border-box includes padding and border in the specified dimensions.'],
+      ['Which CSS property controls text size?','font-size','text-weight','size-font','letter-height',0,'font-size sets the size of text.'],
+      ['Which property creates space between CSS grid or flex items?','padding','gap','indent','spacing-mode',1,'gap sets the spacing between layout items.'],
+      ['Which declaration makes text bold in CSS?','font-weight: 700;','text-bold: true;','font-style: bold;','weight: heavy;',0,'font-weight accepts values such as 700 or bold.'],
+      ['Which JavaScript keyword declares a block-scoped variable that can be reassigned?','const','let','static','define',1,'let declares a block-scoped binding that can be reassigned.'],
+      ['Which JavaScript keyword is usually preferred for a binding that will not be reassigned?','var always','const','fixed','finalize',1,'const prevents reassignment of the binding.'],
+      ['Which operator checks strict equality in JavaScript?','=','==','===','=>',2,'=== compares values without type coercion.'],
+      ['What does document.querySelector(".card") return?','Every card as an array','The first matching element or null','Only CSS text','A new card element',1,'querySelector returns the first matching element or null.'],
+      ['Which method attaches an event handler?','addEventListener()','listenNow()','attachHTML()','eventStart()',0,'addEventListener registers a handler for an event.'],
+      ['Which method writes a message to the browser developer console?','printPage()','console.log()','document.writeLog()','alertConsole()',1,'console.log outputs values to the developer console.'],
+      ['What does an array store?','Only one fixed string','An ordered collection of values','Only HTML tags','A CSS stylesheet',1,'Arrays hold ordered elements, which can be accessed by index.'],
+      ['Which array method adds an item to the end?','push()','shift()','slice()','join()',0,'push adds one or more elements at the end.'],
+      ['What does a function help you do?','Reuse a named block of code','Change HTML into CSS automatically','Create a browser tab only','Remove all variables',0,'Functions package logic so it can be called when needed.'],
+      ['Which statement runs code only when a condition is true?','repeat','if','import','label',1,'if executes its block when the condition evaluates truthy.'],
+      ['Which loop is commonly used to repeat a known number of times?','for loop','style loop','head loop','href loop',0,'A for loop commonly uses initialization, condition and update.'],
+      ['What is the result of 3 + "4" in JavaScript?','7','34','12','NaN always',1,'With a string operand, + performs concatenation in this example.'],
+      ['Which value means “no value assigned yet” in JavaScript?','undefined','empty-tag','zeroed','void-string',0,'A declared variable without an assigned value is undefined.'],
+      ['What does JSON.parse() do?','Turns JSON text into a JavaScript value','Encrypts a password','Runs CSS','Creates a new HTML page',0,'JSON.parse parses valid JSON text into a value.'],
+      ['Which Python function displays output?','echo()','console.log()','print()','writeLine()',2,'Python commonly uses print() to display output.'],
+      ['Which is a valid Python variable assignment?','let score == 10','score = 10','int score := 10;','score <- 10',1,'Python assigns a value using a single equals sign.'],
+      ['Which symbol starts a single-line comment in Python?','//','#','<!--','**',1,'Python single-line comments begin with #.'],
+      ['What does range(3) produce for a loop?','1, 2, 3','0, 1, 2','0, 1, 2, 3','3 only',1,'range(3) yields 0, 1 and 2 when iterated.'],
+      ['Which Python structure stores an ordered, changeable collection?','tuple','list','str only','range only',1,'Lists are ordered and mutable.'],
+      ['How is a Python code block usually indicated?','Curly braces','Indentation','Semicolons only','HTML tags',1,'Indentation defines Python block structure.'],
+      ['Which Python keyword starts a conditional branch?','when','if','check','caseonly',1,'if starts a conditional statement.'],
+      ['Which file extension is commonly used for Python source files?','.py','.pt','.pythonhtml','.pyscriptx',0,'.py is the conventional Python source extension.'],
+      ['What is Git primarily used for?','Version control','Image compression','Hosting email only','Writing CSS only',0,'Git tracks changes to files over time.'],
+      ['What does a Git commit represent?','A saved snapshot of tracked changes','A browser refresh','A CSS class','A server password',0,'A commit records a set of changes in repository history.'],
+      ['What is GitHub Pages suited to hosting?','Static websites','Private databases by itself','Always-on Node servers','Desktop apps only',0,'GitHub Pages serves static site content such as HTML, CSS and JS.'],
+      ['Why should API secret keys not be placed in frontend JavaScript?','Visitors can inspect client-side code','They make pages colourful','Browsers cannot read strings','They stop all network requests',0,'Anything shipped to a browser can be inspected; secrets belong on a server.'],
+      ['What does responsive design aim to do?','Adapt layouts to different screen sizes','Make every page identical width','Disable mobile access','Require a native app',0,'Responsive layouts adapt to available viewport sizes.'],
+      ['What does the HTML lang attribute help communicate?','The document language','The image size','The hosting provider','The CSS framework',0,'lang helps assistive technologies and browsers identify the page language.'],
+      ['What is the purpose of meaningful alt text?','Describe informative image content','Set the image border','Compress the image','Create a hyperlink automatically',0,'Useful alt text communicates the image’s relevant information.'],
+      ['Why should buttons have clear accessible names?','So their purpose is understandable to assistive technology users','To increase file size','To disable keyboard input','To replace all headings',0,'An accessible name tells users what a control does.'],
+      ['Which is a good first debugging step when a page behaves unexpectedly?','Read the browser console error and reproduce the issue','Delete all files immediately','Publish secret keys','Ignore the error',0,'Console messages and a reproducible case help narrow down the cause.']
+    ];
+    let quizQuestions=[],quizIndex=0,quizAnswers=[];
+    const quizArea=document.getElementById('quizArea'),quizFinal=document.getElementById('quizFinal');
+    function escapeHtml(str){return String(str).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+    function startQuiz(){const count=Number(document.getElementById('quizCount').value);quizQuestions=[...questionBank].sort(()=>Math.random()-.5).slice(0,count);quizIndex=0;quizAnswers=[];quizFinal.textContent='';renderQuestion();}
+    function renderQuestion(){if(quizIndex>=quizQuestions.length){renderQuizResults();return;}const q=quizQuestions[quizIndex];quizArea.innerHTML='<div class="flex justify-between gap-3 text-xs text-amber-200"><span>QUESTION '+(quizIndex+1)+' / '+quizQuestions.length+'</span><span>'+Math.round(quizIndex/quizQuestions.length*100)+'% progress</span></div><div class="h-1.5 bg-black/50 rounded-full mt-2 overflow-hidden"><div class="h-full bg-amber-400" style="width:'+((quizIndex+1)/quizQuestions.length*100)+'%"></div></div><h3 class="font-bold text-base sm:text-lg mt-5">'+escapeHtml(q[0])+'</h3><div class="grid gap-2 mt-4">'+q.slice(1,5).map((opt,i)=>'<button type="button" class="quiz-answer text-left rounded-xl border border-amber-500/20 p-3 text-sm hover:bg-amber-500/10" data-answer="'+i+'"><span class="text-amber-300 font-bold mr-2">'+String.fromCharCode(65+i)+'.</span>'+escapeHtml(opt)+'</button>').join('')+'</div><div class="flex justify-end mt-4"><button id="nextQuizQuestion" class="rounded-xl bg-gradient-to-r from-amber-400 to-yellow-600 px-5 py-3 text-sm font-black text-[#220308]" disabled>'+(quizIndex===quizQuestions.length-1?'Finish quiz':'Next question')+' <i class="fa-solid fa-arrow-right ml-1"></i></button></div>';quizArea.querySelectorAll('.quiz-answer').forEach(btn=>btn.addEventListener('click',()=>{quizArea.querySelectorAll('.quiz-answer').forEach(b=>{b.disabled=true;b.classList.remove('border-amber-500/20');});btn.classList.add('border-amber-300','bg-amber-500/10');quizAnswers[quizIndex]=Number(btn.dataset.answer);document.getElementById('nextQuizQuestion').disabled=false;}));document.getElementById('nextQuizQuestion').addEventListener('click',()=>{quizIndex++;renderQuestion();});}
+    function renderQuizResults(){const score=quizQuestions.reduce((n,q,i)=>n+(quizAnswers[i]===q[5]?1:0),0);quizArea.innerHTML='<div class="text-center py-4"><div class="text-4xl">'+(score/quizQuestions.length>=.8?'🏆':score/quizQuestions.length>=.5?'🎯':'🧠')+'</div><h3 class="font-cinzel text-2xl font-bold text-amber-100 mt-3">You scored '+score+' / '+quizQuestions.length+'</h3><p class="text-sm text-slate-300 mt-2">'+Math.round(score/quizQuestions.length*100)+'% — '+(score/quizQuestions.length>=.8?'Excellent work!':score/quizQuestions.length>=.5?'Good progress. Review the explanations below.':'Keep practising; mistakes are part of learning.')+'</p></div><div class="space-y-3 mt-4">'+quizQuestions.map((q,i)=>'<article class="rounded-xl border p-3 '+(quizAnswers[i]===q[5]?'border-emerald-500/30':'border-rose-500/30')+'"><p class="font-bold text-sm">'+(i+1)+'. '+escapeHtml(q[0])+'</p><p class="text-xs mt-2 '+(quizAnswers[i]===q[5]?'text-emerald-200':'text-rose-200')+'">Your answer: '+(quizAnswers[i]===undefined?'Not answered':escapeHtml(q[quizAnswers[i]+1]))+'</p><p class="text-xs text-amber-200 mt-1">Correct answer: '+escapeHtml(q[q[5]+1])+'</p><p class="text-xs text-slate-300 mt-1">'+escapeHtml(q[6])+'</p></article>').join('')+'</div><button id="quizTryAgain" class="rounded-xl bg-gradient-to-r from-amber-400 to-yellow-600 px-5 py-3 text-sm font-black text-[#220308] mt-5">Try another set</button>';document.getElementById('quizTryAgain').addEventListener('click',startQuiz);quizFinal.textContent='Your score is saved for this session only; no account is needed.';}
+    document.getElementById('startQuiz').addEventListener('click',startQuiz);document.getElementById('restartQuiz').addEventListener('click',startQuiz);
+
+    // Certificate: local browser print-to-PDF, gated by lesson completion.
+    const certStatus=document.getElementById('certStatus'),generateCert=document.getElementById('generateCert'),printCert=document.getElementById('printCert'),certificatePaper=document.getElementById('certificatePaper');
+    function certGate(){const n=completedLessons.length;generateCert.disabled=n<8;generateCert.classList.toggle('opacity-50',n<8);certStatus.textContent=n>=8?'Unlocked! Add your name and generate your certificate.':'Complete '+Math.max(0,8-n)+' more core lesson(s) to unlock certificate generation.';}
+    const oldUpdateLessonProgress=updateLessonProgress;
+    // Refresh certificate unlock state whenever progress changes.
+    document.querySelectorAll('.lesson-done').forEach(btn=>btn.addEventListener('click',()=>setTimeout(certGate,0)));
+    certGate();
+    generateCert.addEventListener('click',()=>{const name=document.getElementById('certName').value.trim();if(completedLessons.length<8){certGate();return;}if(!name){certStatus.textContent='Please enter your name first.';document.getElementById('certName').focus();return;}document.getElementById('certStudentDisplay').textContent=name;document.getElementById('certCourseDisplay').textContent=document.getElementById('certCourse').value;document.getElementById('certDateDisplay').textContent='Completed on '+new Date().toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});document.getElementById('certIdDisplay').textContent='VN-CA-'+new Date().getFullYear()+'-'+Math.random().toString(36).slice(2,8).toUpperCase();certificatePaper.classList.remove('hidden');printCert.disabled=false;certStatus.textContent='Certificate generated. Use Print / Save as PDF to keep a copy.';certificatePaper.scrollIntoView({behavior:'smooth',block:'center'});});
+    printCert.addEventListener('click',()=>{if(certificatePaper.classList.contains('hidden'))return;document.body.classList.add('printing-certificate');window.print();document.body.classList.remove('printing-certificate');});
+
+  </script>
+
+<!-- Vidya Nirman shared account session: same-domain pages -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth-config.js"></script>
+<script src="global-auth.js"></script>
+<script src="global-learning.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+VIDYA NIRMAN PROJECT AUDIT AND CHANGE REPORT
+Date: 17 October 2026
+Source: VidyaNirman_Final_Ultimate.zip (33 files; about 14.1 MB uncompressed)
+
+SAFE WORKING COPY
+This deliverable was prepared from the attached ZIP. It was not connected to the GitHub repository and has not been deployed. The original ZIP remains the unchanged backup/source snapshot.
+
+WHAT I FOUND
+- The package contains the existing learning site and its pages, assets, quiz pages, AI chat integration, shared Supabase sign-in, dashboard, study hub, and service worker.
+- Dashboard history, notes, and study activity use browser localStorage. The included SQL is optional groundwork only; there is no cloud-sync implementation in the package. Cross-device sync is not available.
+- The AI chat calls the existing Render endpoint from the browser. Response handling differs between pages, so backend compatibility was not proven by this audit.
+- auth-config.js contains a Supabase URL and browser publishable key. No service-role/sb_secret key was identified in the inspected auth configuration. The live project's key status and database policies were not independently verified.
+- The package has no build/test manifest, so no project build command is provided.
+
+CHANGE MADE
+- auth.html: password reset mode hides the email field. It remained required, which blocked browser form submission even though hidden. Reset mode now clears the email field's required constraint. No pages, logo, lessons, questions, or existing features were removed.
+
+FILES
+- Changed: auth.html
+- Added: AUDIT-AND-TEST-REPORT.txt
+- Removed: none
+
+CHECKS
+PASS: Source ZIP opened and project files were extracted.
+PASS: Confirmed reset mode hides the email field and clears its required constraint; password remains required with a six-character minimum.
+PASS: Deliverable retains all 33 original project files, plus this report.
+NOT TESTED: Email signup/confirmation, password reset end-to-end against Supabase, Google OAuth, live session persistence, database/RLS, AI health/chat endpoints, live website navigation, device layouts, and browser console/network behavior. These require live hosting, browser testing, or external account access.
+NOT RUN: Build or JavaScript parser checks; this static ZIP has no build/test manifest and Node.js is unavailable in this environment.
+
+MANUAL FOLLOW-UP
+Before uploading to GitHub Pages, test the password reset link end-to-end on the deployed domain and verify Supabase Authentication URL Configuration. Review the diff against a repository backup before committing. Do not run the optional SQL expecting it to enable cloud sync; application sync code is still required.

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#220308">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sign in | Vidya Nirman</title><link rel="icon" type="image/png" href="logo.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth-config.js"></script>
+<style>body{background:radial-gradient(circle at top,#4b101b,#170207 60%,#0f0103);color:#fff9e6;font-family:Arial,sans-serif}.gold{color:#ffd700}.field{width:100%;background:#19060a;border:1px solid #785521;border-radius:12px;padding:12px;color:#fff9e6;outline:none}.field:focus{border-color:#ffd700;box-shadow:0 0 0 2px #ffd70022}.btn{width:100%;border-radius:12px;padding:12px;font-weight:800;background:linear-gradient(135deg,#ffd700,#d4af37);color:#220308}.secondary{width:100%;border:1px solid #8c6c29;border-radius:12px;padding:12px;font-weight:700;background:#2b0b12;color:#fff3c4}</style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+<main class="w-full max-w-md rounded-3xl border border-amber-500/40 bg-black/30 p-6 sm:p-8 shadow-2xl">
+<div class="text-center mb-6"><img src="logo.png" alt="Vidya Nirman logo" class="w-16 h-16 object-contain mx-auto mb-3"><h1 class="text-2xl font-black gold">VIDYA NIRMAN</h1><p class="text-sm text-amber-100/75 mt-2">One account for all your learning portals</p></div>
+<div id="setup-warning" class="hidden rounded-xl border border-red-400/50 bg-red-950/50 p-3 text-sm mb-4">Pehle <b>auth-config.js</b> mein Supabase Project URL aur Publishable/anon key add karo. Secret/service_role key kabhi use mat karna.</div>
+<div id="notice" role="status" class="hidden rounded-xl border border-amber-500/40 bg-amber-950/40 p-3 text-sm mb-4"></div>
+<div id="auth-tabs" class="grid grid-cols-2 gap-2 mb-4"><button id="tab-login" class="btn" type="button">Sign in</button><button id="tab-signup" class="secondary" type="button">Create account</button></div>
+<form id="auth-form" class="space-y-3">
+<label class="block text-sm">Name <input id="name" class="field mt-1" autocomplete="name" placeholder="Your name" /></label>
+<label class="block text-sm">Email <input id="email" class="field mt-1" type="email" required autocomplete="email" placeholder="you@example.com" /></label>
+<label class="block text-sm">Password <input id="password" class="field mt-1" type="password" minlength="6" required autocomplete="current-password" placeholder="At least 6 characters" /></label>
+<button id="submit-btn" class="btn" type="submit">Sign in</button>
+</form>
+<button id="google-btn" class="secondary mt-3" type="button">Continue with Google</button>
+<button id="reset-btn" class="w-full text-sm text-amber-200 underline mt-4" type="button">Forgot password?</button>
+<p class="text-xs text-amber-100/60 text-center mt-6">By continuing, you agree to use this learning site responsibly.</p>
+<a id="back-link" href="index.html" class="block text-center text-sm gold mt-5">← Back to Vidya Nirman</a>
+</main>
+<script>
+(() => {
+ const url=window.VN_SUPABASE_URL, key=window.VN_SUPABASE_ANON_KEY;
+ const configured=typeof url==='string'&&url.startsWith('https://')&&typeof key==='string'&&key.length>20&&!key.includes('PASTE_YOUR_')&&window.supabase?.createClient;
+ const params=new URLSearchParams(location.search); const rawNext=params.get('next')||'index.html';
+ // Allow only same-origin relative paths; prevent external redirect injection.
+ const nextUrl=new URL(rawNext,location.origin); const safeNext=nextUrl.origin===location.origin?nextUrl.href:new URL('index.html',location.origin).href;
+ document.getElementById('back-link').href=safeNext;
+ const notice=document.getElementById('notice'); const warn=document.getElementById('setup-warning');
+ function message(t, bad=false){notice.textContent=t;notice.classList.remove('hidden');notice.style.borderColor=bad?'#f87171':'';}
+ if(!configured){warn.classList.remove('hidden');document.getElementById('auth-form').querySelectorAll('input,button').forEach(x=>x.disabled=true);document.getElementById('google-btn').disabled=true;document.getElementById('reset-btn').disabled=true;return;}
+ const client=window.supabase.createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storage:window.localStorage}}); window.VN_AUTH=client;
+ let mode='login'; const form=document.getElementById('auth-form'); const name=document.getElementById('name'); const email=document.getElementById('email'); const password=document.getElementById('password'); const submit=document.getElementById('submit-btn');
+ function setMode(m){mode=m;document.getElementById('tab-login').className=m==='login'?'btn':'secondary';document.getElementById('tab-signup').className=m==='signup'?'btn':'secondary';name.parentElement.style.display=m==='signup'?'block':'none';submit.textContent=m==='signup'?'Create account':'Sign in';password.autocomplete=m==='signup'?'new-password':'current-password';}
+ document.getElementById('tab-login').onclick=()=>setMode('login'); document.getElementById('tab-signup').onclick=()=>setMode('signup'); setMode('login');
+ client.auth.getSession().then(({data})=>{if(data.session&&!params.has('mode')) location.replace(safeNext);});
+ client.auth.onAuthStateChange((event,session)=>{if(session&&(event==='SIGNED_IN'||event==='INITIAL_SESSION')){if(params.get('mode')==='reset') return; location.replace(safeNext);}});
+ form.addEventListener('submit',async e=>{e.preventDefault();submit.disabled=true;const old=submit.textContent;submit.textContent='Please wait…';try{
+  let result;
+  if(mode==='reset'){result=await client.auth.updateUser({password:password.value});if(!result.error){message('Password update ho gaya! Ab sign in kar sakte ho.');setMode('login');params.delete('mode');history.replaceState({},'',location.pathname+'?next='+encodeURIComponent(safeNext));}}
+  else if(mode==='signup'){result=await client.auth.signUp({email:email.value.trim(),password:password.value,options:{data:{full_name:name.value.trim()},emailRedirectTo:new URL('auth.html?next='+encodeURIComponent(safeNext),location.origin).href}});if(!result.error){if(result.data.session)message('Account created! You are signed in.');else message('Signup successful. Apne email mein confirmation link check karo, phir sign in karna.');}}
+  else {result=await client.auth.signInWithPassword({email:email.value.trim(),password:password.value});}
+  if(result.error)message(result.error.message,true); else if(mode==='login'&&result.data.session)location.replace(safeNext);
+ }catch(err){message(err.message||'Something went wrong.',true);}finally{submit.disabled=false;submit.textContent=old;}});
+ document.getElementById('google-btn').onclick=async()=>{try{const {error}=await client.auth.signInWithOAuth({provider:'google',options:{redirectTo:new URL('auth.html?next='+encodeURIComponent(safeNext),location.origin).href}});if(error)message(error.message,true);}catch(e){message(e.message,true);}};
+ document.getElementById('reset-btn').onclick=async()=>{const addr=email.value.trim();if(!addr){message('Pehle Email field mein apna email likho, phir Forgot password dabao.',true);email.focus();return;}try{const {error}=await client.auth.resetPasswordForEmail(addr,{redirectTo:new URL('auth.html?mode=reset&next='+encodeURIComponent(safeNext),location.origin).href});if(error)message(error.message,true);else message('Password reset link email kar diya gaya hai. Inbox/spam check karo.');}catch(e){message(e.message,true);}};
+ if(params.get('mode')==='reset'){mode='reset';name.parentElement.style.display='none';email.parentElement.style.display='none';email.required=false;password.autocomplete='new-password';password.placeholder='Enter a new password';password.minLength=6;submit.textContent='Update password';document.getElementById('auth-tabs').style.display='none';document.getElementById('google-btn').style.display='none';document.getElementById('reset-btn').style.display='none';message('Naya password set karo. Email ke recovery link se hi is page par aana.');}
+})();
+</script>
+<script>if('serviceWorker'in navigator&&location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));</script>
+</body></html>
