@@ -204,6 +204,7 @@
             <nav class="hidden lg:flex items-center space-x-6 text-xs font-bold uppercase tracking-wider">
                 <a href="#home" class="text-amber-100 hover:text-amber-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-house text-amber-400"></i> Home</a>
                 <a href="#portals" class="text-amber-100 hover:text-amber-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-book-open text-amber-400"></i> Learning Portals</a>
+                <a href="coding.html" class="text-amber-100 hover:text-amber-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-code text-amber-400"></i> Coding Academy</a>
                 <a href="#quests" class="text-amber-100 hover:text-amber-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-trophy text-amber-400"></i> Quest Arenas</a>
                 <a href="#directory" class="text-amber-100 hover:text-amber-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-list-check text-amber-400"></i> Direct Links</a>
                 <a href="#founders" class="text-amber-100 hover:text-amber-400 transition-colors flex items-center gap-1.5"><i class="fa-solid fa-users text-amber-400"></i> Founders</a>
@@ -227,6 +228,7 @@
         <div id="mobileMenu" class="hidden lg:hidden bg-[#180206] border-b border-amber-500/30 px-6 py-4 space-y-3">
             <a href="#home" class="mobile-link block text-amber-100 hover:text-amber-400 py-1 font-semibold"><i class="fa-solid fa-house mr-2 text-amber-400"></i> Home</a>
             <a href="#portals" class="mobile-link block text-amber-100 hover:text-amber-400 py-1 font-semibold"><i class="fa-solid fa-book-open mr-2 text-amber-400"></i> Learning Portals</a>
+            <a href="coding.html" class="mobile-link block text-amber-100 hover:text-amber-400 py-1 font-semibold"><i class="fa-solid fa-code mr-2 text-amber-400"></i> Coding Academy</a>
             <a href="#quests" class="mobile-link block text-amber-100 hover:text-amber-400 py-1 font-semibold"><i class="fa-solid fa-trophy mr-2 text-amber-400"></i> Quest Arenas</a>
             <a href="grand-quest.html" class="mobile-link block text-amber-300 font-bold py-1"><i class="fa-solid fa-crown mr-2 text-amber-400"></i> GRAND-QUEST Championship</a>
             <a href="#directory" class="mobile-link block text-amber-100 hover:text-amber-400 py-1 font-semibold"><i class="fa-solid fa-list-check mr-2 text-amber-400"></i> Portal Directory</a>
@@ -259,7 +261,7 @@
             </p>
 
             <!-- Quick Access Gateway Ribbon -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 max-w-6xl mx-auto mb-12">
+            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2.5 max-w-6xl mx-auto mb-12">
                 
                 <a href="vidyanirman_bio_class_9th_interactive_biology_portal.html" class="p-3 rounded-xl bg-maroon-card border-gold-glow hover:bg-amber-950/60 transition-all text-center group">
                     <i class="fa-solid fa-dna text-emerald-400 text-lg mb-1 group-hover:scale-110 transition-transform block"></i>
@@ -294,6 +296,11 @@
                 <a href="grand-quest.html" class="p-3 rounded-xl bg-gradient-to-b from-amber-500/30 to-amber-700/30 border border-amber-400 hover:scale-105 transition-all text-center group col-span-2 sm:col-span-1">
                     <i class="fa-solid fa-trophy text-yellow-300 text-lg mb-1 group-hover:scale-110 transition-transform block animate-bounce"></i>
                     <span class="text-[10px] font-black text-amber-300 block uppercase tracking-tighter">Grand Quest</span>
+                </a>
+
+                <a href="coding.html" class="p-3 rounded-xl bg-maroon-card border-gold-glow hover:bg-amber-950/60 transition-all text-center group">
+                    <i class="fa-solid fa-code text-violet-300 text-lg mb-1 group-hover:scale-110 transition-transform block"></i>
+                    <span class="text-[10px] font-bold text-amber-200 block uppercase">Coding Academy</span>
                 </a>
 
             </div>
@@ -473,6 +480,30 @@
                         <button onclick="openPortalModal('VIDYANIRMAN CHEMISTRY', 'vidyanirman-chemistry.html', 'Class 9th Chemistry Learning Portal covering Atoms, Molecules, and Mole Concept.')" class="w-full py-2 px-3 rounded-lg bg-amber-950/60 text-amber-300 text-[11px] font-semibold hover:bg-amber-900/60 transition-colors">
                             <i class="fa-solid fa-circle-info mr-1"></i> Preview Portal Details
                         </button>
+                    </div>
+                </div>
+
+                <!-- PORTAL 4: VN CODING ACADEMY -->
+                <div class="bg-maroon-card p-8 rounded-2xl border-gold-glow flex flex-col justify-between tilt-card group">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="bg-violet-500/20 text-violet-300 text-[10px] font-extrabold px-3 py-1 rounded-md border border-violet-500/30 uppercase tracking-wide">BEGINNER CODING</span>
+                            <i class="fa-solid fa-code text-violet-300 text-2xl group-hover:scale-110 transition-transform"></i>
+                        </div>
+                        <h3 class="font-cinzel text-xl font-bold text-amber-100 mb-2">VN CODING ACADEMY</h3>
+                        <p class="text-slate-300 text-xs leading-relaxed mb-6">
+                            Start from zero with beginner-friendly HTML, CSS, and JavaScript lessons explained in simple Hinglish.
+                        </p>
+                        <ul class="space-y-2.5 mb-8 text-xs text-slate-300">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-violet-300 text-[10px]"></i> Step-by-step lessons and examples</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-violet-300 text-[10px]"></i> See how HTML, CSS and JS work</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-violet-300 text-[10px]"></i> Practice questions and mini challenges</li>
+                        </ul>
+                    </div>
+                    <div class="space-y-2 border-t border-amber-500/20 pt-4">
+                        <a href="coding.html" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-violet-700 to-purple-900 hover:from-violet-600 hover:to-purple-800 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg">
+                            <span>Start Learning Coding</span><i class="fa-solid fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
 
@@ -806,6 +837,7 @@
                         <li><a href="vidyanirman_bio_class_9th_interactive_biology_portal.html" class="hover:text-amber-400 transition-colors">VIDYANIRMAN BIO</a></li>
                         <li><a href="physics.html" class="hover:text-amber-400 transition-colors">VIDYANIRMAN PHYSICS</a></li>
                         <li><a href="Chem.html" class="hover:text-amber-400 transition-colors">VIDYANIRMAN CHEMISTRY</a></li>
+                        <li><a href="coding.html" class="hover:text-amber-400 transition-colors">VN CODING ACADEMY</a></li>
                     </ul>
                 </div>
 
